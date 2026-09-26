@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Calendar card with "AR", drawn inside the safe zone of a 108dp adaptive icon.
+     Keep in sync with the header logo in index.html. -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <!-- shadow -->
+    <path
+        android:fillColor="#000000"
+        android:fillAlpha="0.18"
+        android:pathData="M36,37 H72 A6,6 0 0 1 78,43 V74 A6,6 0 0 1 72,80 H36 A6,6 0 0 1 30,74 V43 A6,6 0 0 1 36,37 Z" />
+    <!-- card -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M36,34 H72 A6,6 0 0 1 78,40 V72 A6,6 0 0 1 72,78 H36 A6,6 0 0 1 30,72 V40 A6,6 0 0 1 36,34 Z" />
+    <!-- header band -->
+    <path
+        android:fillColor="#F59E0B"
+        android:pathData="M36,34 H72 A6,6 0 0 1 78,40 V47 H30 V40 A6,6 0 0 1 36,34 Z" />
+    <!-- rings -->
+    <path
+        android:fillColor="#1E293B"
+        android:pathData="M42,29 A2.5,2.5 0 0 1 44.5,31.5 V38.5 A2.5,2.5 0 0 1 39.5,38.5 V31.5 A2.5,2.5 0 0 1 42,29 Z M66,29 A2.5,2.5 0 0 1 68.5,31.5 V38.5 A2.5,2.5 0 0 1 63.5,38.5 V31.5 A2.5,2.5 0 0 1 66,29 Z" />
+    <!-- A -->
+    <path
+        android:strokeColor="#4F46E5"
+        android:strokeWidth="5"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"
+        android:pathData="M38.5,71 L45,53 L51.5,71 M41.2,65 H48.8" />
+    <!-- R -->
+    <path
+        android:strokeColor="#DB2777"
+        android:strokeWidth="5"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"
+        android:pathData="M58.5,71 V53 H64 A4.5,4.5 0 0 1 64,62 H58.5 M63,62 L69.5,71" />
+</vector>

@@ -3,7 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Salary Tracker</title>
+<title>AR Salary Tracker</title>
+<link rel="icon" id="favicon">
 <style>
   :root {
     --bg: #f4f5f7;
@@ -14,12 +15,15 @@
     --field: #f8f9fb;
     --accent: #2563eb;
     --accent-soft: #eaf0ff;
+    --on-accent: #ffffff;
     --p-bg: #16a34a;
     --p-fg: #ffffff;
     --a-bg: #64748b;
     --a-fg: #ffffff;
     --friday: #dc2626;
     --friday-bg: #fef2f2;
+    --brand-a: #4f46e5;
+    --brand-b: #db2777;
     --shadow: 0 1px 2px rgba(16, 24, 40, .05), 0 1px 3px rgba(16, 24, 40, .07);
   }
   @media (prefers-color-scheme: dark) {
@@ -32,12 +36,15 @@
       --field: #11151c;
       --accent: #6b95ff;
       --accent-soft: #1d2842;
+      --on-accent: #0b1220;
       --p-bg: #22c55e;
       --p-fg: #04210f;
       --a-bg: #94a3b8;
       --a-fg: #0f172a;
       --friday: #f87171;
       --friday-bg: #2a1719;
+      --brand-a: #818cf8;
+      --brand-b: #f472b6;
       --shadow: none;
     }
   }
@@ -55,7 +62,14 @@
 
   /* Header */
   header { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin-bottom: 14px; }
-  h1 { font-size: 20px; margin: 0; }
+  h1 { font-size: 20px; margin: 0; line-height: 1.15; }
+  .brand { display: flex; align-items: center; gap: 10px; }
+  .logo { width: 42px; height: 42px; flex: none; }
+  .byline {
+    font-size: 12.5px; font-weight: 650; color: var(--brand-a);
+    background: linear-gradient(90deg, var(--brand-a), var(--brand-b));
+    -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+  }
   .nav { display: flex; align-items: center; gap: 6px; }
   .nav .month { min-width: 140px; text-align: center; font-weight: 650; }
   .iconbtn {
@@ -72,8 +86,35 @@
   .card { background: var(--card); border: 1px solid var(--line); border-radius: 14px; box-shadow: var(--shadow); margin-bottom: 14px; }
 
   /* Rates */
-  .rates { padding: 14px; display: grid; grid-template-columns: 1fr 1fr 80px; gap: 10px; }
+  .rates { padding: 14px; }
+  .rgrid { display: grid; grid-template-columns: 1fr 1fr 80px; gap: 10px; }
   .rates label { display: flex; flex-direction: column; gap: 5px; font-size: 12px; color: var(--muted); font-weight: 600; }
+  .rates input.changed { border-color: var(--accent); background: var(--card); }
+  .rnote { margin: 8px 0 0; font-size: 12.5px; color: var(--muted); }
+  .rnote:empty { display: none; }
+  .rpending { margin-top: 12px; padding: 12px; border-radius: 12px; background: var(--accent-soft); font-size: 13.5px; }
+  .rpending[hidden], .rhist[hidden] { display: none; }
+  .rpend-row { display: flex; gap: 10px; align-items: flex-end; flex-wrap: wrap; margin-top: 10px; }
+  .rpend-row label { flex: 1 1 150px; }
+  .primary {
+    border: 0; background: var(--accent); color: var(--on-accent);
+    border-radius: 10px; padding: 10px 16px; font-weight: 650;
+  }
+  .rpend-alt { display: flex; justify-content: space-between; gap: 6px 14px; flex-wrap: wrap; margin-top: 10px; }
+  .linkbtn { border: 0; background: none; color: var(--accent); padding: 4px 0; font-size: 13px; text-decoration: underline; text-align: left; }
+  .rhist { margin-top: 12px; border-top: 1px solid var(--line); padding-top: 8px; }
+  .rh-title { font-size: 12px; font-weight: 600; color: var(--muted); margin-bottom: 2px; }
+  .rh-row { display: flex; align-items: center; gap: 10px; padding: 5px 0; font-size: 13.5px; }
+  .rh-from { flex: none; min-width: 112px; color: var(--muted); }
+  .rh-val { flex: 1; font-weight: 600; font-variant-numeric: tabular-nums; }
+  .rh-del {
+    flex: none; width: 30px; height: 28px; border-radius: 8px;
+    border: 1px solid var(--line); background: var(--field); color: var(--muted);
+  }
+  .ratechg {
+    padding: 6px 14px; font-size: 12.5px; font-weight: 600;
+    color: var(--accent); background: var(--accent-soft); border-bottom: 1px solid var(--line);
+  }
   input {
     font: inherit; color: var(--text); background: var(--field);
     border: 1px solid var(--line); border-radius: 10px; padding: 9px 10px; width: 100%; min-width: 0;
@@ -150,6 +191,15 @@
 
   footer { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; margin-top: 18px; }
   footer p { width: 100%; text-align: center; font-size: 12px; color: var(--muted); margin: 0 0 4px; }
+  a.byline { display: inline-block; text-decoration: none; }
+  .credit {
+    width: 100%; margin-top: 14px; padding: 14px; text-align: center;
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    font-size: 13px; color: var(--muted); scroll-margin-top: 12px;
+  }
+  .credit .byline { font-size: 14px; }
+  .credit .phone { display: block; margin: 6px 0 10px; color: var(--text); font-size: 15px; font-weight: 650; text-decoration: none; font-variant-numeric: tabular-nums; }
+  .credit .ghost { display: inline-block; text-decoration: none; margin: 0 3px; }
 
   @media (max-width: 520px) {
     .sgrid { grid-template-columns: 1fr 1fr; }
@@ -157,7 +207,7 @@
   }
   @media print {
     body { background: #fff; }
-    .nav, .fill, footer, .halves { display: none !important; }
+    .nav, .fill, footer, .halves, .rpending, .rh-del { display: none !important; }
     .card { box-shadow: none; break-inside: avoid; }
     .ot input { border: 0; background: none; }
   }
@@ -166,7 +216,30 @@
 <body>
 <div class="wrap">
   <header>
-    <h1>Salary Tracker</h1>
+    <div class="brand">
+      <svg class="logo" id="logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 108 108" aria-hidden="true">
+        <defs>
+          <linearGradient id="logoBg" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#06B6D4"/>
+            <stop offset=".5" stop-color="#6366F1"/>
+            <stop offset="1" stop-color="#EC4899"/>
+          </linearGradient>
+        </defs>
+        <rect width="108" height="108" rx="26" fill="url(#logoBg)"/>
+        <circle cx="16" cy="18" r="16" fill="#fff" fill-opacity=".14"/>
+        <circle cx="96" cy="94" r="20" fill="#fff" fill-opacity=".12"/>
+        <path fill="#000" fill-opacity=".18" d="M36,37 H72 A6,6 0 0 1 78,43 V74 A6,6 0 0 1 72,80 H36 A6,6 0 0 1 30,74 V43 A6,6 0 0 1 36,37 Z"/>
+        <path fill="#fff" d="M36,34 H72 A6,6 0 0 1 78,40 V72 A6,6 0 0 1 72,78 H36 A6,6 0 0 1 30,72 V40 A6,6 0 0 1 36,34 Z"/>
+        <path fill="#F59E0B" d="M36,34 H72 A6,6 0 0 1 78,40 V47 H30 V40 A6,6 0 0 1 36,34 Z"/>
+        <path fill="#1E293B" d="M42,29 A2.5,2.5 0 0 1 44.5,31.5 V38.5 A2.5,2.5 0 0 1 39.5,38.5 V31.5 A2.5,2.5 0 0 1 42,29 Z M66,29 A2.5,2.5 0 0 1 68.5,31.5 V38.5 A2.5,2.5 0 0 1 63.5,38.5 V31.5 A2.5,2.5 0 0 1 66,29 Z"/>
+        <path fill="none" stroke="#4F46E5" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" d="M38.5,71 L45,53 L51.5,71 M41.2,65 H48.8"/>
+        <path fill="none" stroke="#DB2777" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" d="M58.5,71 V53 H64 A4.5,4.5 0 0 1 64,62 H58.5 M63,62 L69.5,71"/>
+      </svg>
+      <div>
+        <h1>AR Salary Tracker</h1>
+        <a class="byline" href="#contact">Developed by AR</a>
+      </div>
+    </div>
     <div class="nav">
       <button class="iconbtn" id="prev" type="button" aria-label="Previous month">&#8249;</button>
       <div class="month" id="monthLabel"></div>
@@ -176,15 +249,34 @@
   </header>
 
   <section class="card rates">
-    <label>Salary per day
-      <input id="rateDay" type="number" inputmode="decimal" min="0" step="any" placeholder="e.g. 100">
-    </label>
-    <label>Overtime per hour
-      <input id="rateOt" type="number" inputmode="decimal" min="0" step="any" placeholder="e.g. 12.5">
-    </label>
-    <label>Currency
-      <input id="rateCur" type="text" maxlength="6" placeholder="Rs">
-    </label>
+    <div class="rgrid">
+      <label>Salary per day
+        <input id="rateDay" type="number" inputmode="decimal" min="0" step="any" placeholder="e.g. 100">
+      </label>
+      <label>Overtime per hour
+        <input id="rateOt" type="number" inputmode="decimal" min="0" step="any" placeholder="e.g. 12.5">
+      </label>
+      <label>Currency
+        <input id="rateCur" type="text" maxlength="6" placeholder="Rs">
+      </label>
+    </div>
+    <p class="rnote" id="rateNote"></p>
+
+    <div class="rpending" id="ratePending" hidden>
+      <b>New rate?</b> Choose the date it starts. Days before that date keep the old rate.
+      <div class="rpend-row">
+        <label>Starts from
+          <input id="rateFrom" type="date">
+        </label>
+        <button class="primary" id="rateSave" type="button">Save new rate</button>
+      </div>
+      <div class="rpend-alt">
+        <button class="linkbtn" id="rateFix" type="button"></button>
+        <button class="linkbtn" id="rateCancel" type="button">Cancel</button>
+      </div>
+    </div>
+
+    <div class="rhist" id="rateHist" hidden></div>
   </section>
 
   <section class="card summary">
@@ -206,10 +298,17 @@
   <div id="periods"></div>
 
   <footer>
-    <p>Your data is saved in this browser. Download a backup now and then to keep it safe.</p>
+    <p>Your data is saved on this device. Download a backup now and then to keep it safe.</p>
     <button class="ghost" id="exportBtn" type="button">Download backup</button>
     <button class="ghost" id="importBtn" type="button">Restore backup</button>
     <input type="file" id="importFile" accept="application/json,.json" hidden>
+    <div class="credit" id="contact">
+      AR Salary Tracker · <span class="byline">Developed by AR</span>
+      <div>Developer contact</div>
+      <a class="phone" href="tel:+923247440629">+92 324 7440629</a>
+      <a class="ghost" href="tel:+923247440629">Call</a>
+      <a class="ghost" href="https://wa.me/923247440629">WhatsApp</a>
+    </div>
   </footer>
 </div>
 
@@ -222,22 +321,10 @@
   const $ = s => document.querySelector(s);
   const pad = n => String(n).padStart(2, '0');
 
-  let data = load();
-  const now = new Date();
-  let vy = now.getFullYear(), vm = now.getMonth();
-
-  function blank() { return { rates: { day: '', ot: '', cur: '' }, days: {} }; }
-  function normalize(d) {
-    if (!d || typeof d !== 'object' || typeof d.days !== 'object') return null;
-    return { rates: Object.assign(blank().rates, d.rates), days: d.days };
-  }
-  function load() {
-    try { return normalize(JSON.parse(localStorage.getItem(KEY))) || blank(); } catch (e) { return blank(); }
-  }
-  function save() {
-    try { localStorage.setItem(KEY, JSON.stringify(data)); } catch (e) {}
-  }
-
+  const isoDate = (y, m, d) => y + '-' + pad(m + 1) + '-' + pad(d);
+  const todayIso = () => { const t = new Date(); return isoDate(t.getFullYear(), t.getMonth(), t.getDate()); };
+  const longDate = iso => { const p = iso.split('-'); return +p[2] + ' ' + MONTHS[p[1] - 1].slice(0, 3) + ' ' + p[0]; };
+  const byFrom = (a, b) => (a.from < b.from ? -1 : a.from > b.from ? 1 : 0);
   const num = v => { const n = parseFloat(v); return isFinite(n) && n > 0 ? n : 0; };
   const fmt = n => n.toLocaleString('en-US', { maximumFractionDigits: 2 });
   const money = n => {
@@ -248,11 +335,143 @@
   };
   const isFuture = (y, m, d) => { const t = new Date(); t.setHours(0, 0, 0, 0); return new Date(y, m, d) > t; };
 
-  // Rates: entered once, saved, used for every day
-  const rateInputs = { day: $('#rateDay'), ot: $('#rateOt'), cur: $('#rateCur') };
-  function fillRates() { for (const k in rateInputs) rateInputs[k].value = data.rates[k] || ''; }
-  for (const k in rateInputs) {
-    rateInputs[k].addEventListener('input', e => { data.rates[k] = e.target.value; save(); recalc(); });
+  // data.rateHistory: [{ from: 'YYYY-MM-DD', day, ot }] sorted by date.
+  // The first entry has from '' and covers every day before the next one.
+  let data = load();
+  const now = new Date();
+  let vy = now.getFullYear(), vm = now.getMonth();
+
+  function blank() { return { rates: { cur: '' }, rateHistory: [{ from: '', day: 0, ot: 0 }], days: {} }; }
+  function normalize(d) {
+    if (!d || typeof d !== 'object' || !d.days || typeof d.days !== 'object') return null;
+    const r = d.rates || {};
+    let hist = Array.isArray(d.rateHistory)
+      ? d.rateHistory.filter(h => h && typeof h === 'object')
+          .map(h => ({ from: typeof h.from === 'string' ? h.from : '', day: num(h.day), ot: num(h.ot) }))
+      : [];
+    if (!hist.length) hist = [{ from: '', day: num(r.day), ot: num(r.ot) }]; // older versions had one rate for all days
+    hist.sort(byFrom);
+    hist[0].from = '';
+    return { rates: { cur: typeof r.cur === 'string' ? r.cur : '' }, rateHistory: hist, days: d.days };
+  }
+  // Inside the Android app, window.AndroidApp stores data in the phone's app storage
+  function load() {
+    try {
+      const raw = window.AndroidApp ? AndroidApp.load() : localStorage.getItem(KEY);
+      return normalize(JSON.parse(raw)) || blank();
+    } catch (e) { return blank(); }
+  }
+  function save() {
+    const json = JSON.stringify(data);
+    try {
+      if (window.AndroidApp) AndroidApp.store(json); else localStorage.setItem(KEY, json);
+    } catch (e) {}
+  }
+
+  // Rates
+  const latestRate = () => data.rateHistory[data.rateHistory.length - 1];
+  function rateFor(key) {
+    const h = data.rateHistory;
+    let r = h[0];
+    for (let i = 1; i < h.length && h[i].from <= key; i++) r = h[i];
+    return r;
+  }
+  const rateText = r => money(r.day) + '/day · ' + money(r.ot) + '/hr';
+
+  const dayInput = $('#rateDay'), otInput = $('#rateOt'), curInput = $('#rateCur');
+
+  function fillRates() {
+    const r = latestRate();
+    dayInput.value = r.day || '';
+    otInput.value = r.ot || '';
+    curInput.value = data.rates.cur || '';
+    hidePending();
+  }
+
+  // Before any day is marked, typing a rate just sets it. After that, a change asks for a start date.
+  function isSetup() {
+    const h = data.rateHistory;
+    return !Object.keys(data.days).length || (h.length === 1 && !h[0].day && !h[0].ot);
+  }
+
+  function onRateInput() {
+    const r = latestRate();
+    const d = num(dayInput.value), o = num(otInput.value);
+    if (isSetup()) {
+      r.day = d; r.ot = o;
+      save(); renderRates(); render();
+      return;
+    }
+    dayInput.classList.toggle('changed', d !== r.day);
+    otInput.classList.toggle('changed', o !== r.ot);
+    if (d === r.day && o === r.ot) { hidePending(); return; }
+    const pending = $('#ratePending');
+    if (pending.hidden) {
+      $('#rateFrom').value = todayIso();
+      $('#rateFix').textContent = 'Typed it wrong? Fix the rate for all days' + (r.from ? ' since ' + longDate(r.from) : '');
+      pending.hidden = false;
+    }
+  }
+  function hidePending() {
+    $('#ratePending').hidden = true;
+    dayInput.classList.remove('changed');
+    otInput.classList.remove('changed');
+  }
+  function afterRateChange() {
+    save(); fillRates(); renderRates(); render();
+  }
+
+  dayInput.addEventListener('input', onRateInput);
+  otInput.addEventListener('input', onRateInput);
+  curInput.addEventListener('input', () => { data.rates.cur = curInput.value; save(); renderRates(); render(); });
+
+  $('#rateSave').addEventListener('click', () => {
+    const from = $('#rateFrom').value;
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(from)) { $('#rateFrom').focus(); return; }
+    const entry = { from: from, day: num(dayInput.value), ot: num(otInput.value) };
+    const h = data.rateHistory;
+    const same = h.findIndex(x => x.from === from);
+    if (same >= 0) h[same] = entry; else h.push(entry);
+    h.sort(byFrom);
+    h[0].from = '';
+    afterRateChange();
+  });
+  $('#rateFix').addEventListener('click', () => {
+    const r = latestRate();
+    r.day = num(dayInput.value);
+    r.ot = num(otInput.value);
+    afterRateChange();
+  });
+  $('#rateCancel').addEventListener('click', fillRates);
+
+  $('#rateHist').addEventListener('click', ev => {
+    const btn = ev.target.closest('.rh-del');
+    if (!btn) return;
+    const i = +btn.dataset.i;
+    const r = data.rateHistory[i];
+    if (!r || !i) return;
+    if (!confirm('Remove the rate starting ' + longDate(r.from) + '? Those days will use the earlier rate again.')) return;
+    data.rateHistory.splice(i, 1);
+    afterRateChange();
+  });
+
+  function renderRates() {
+    const h = data.rateHistory;
+    const r = latestRate();
+    const note = $('#rateNote'), box = $('#rateHist');
+    if (!r.day && !r.ot) note.textContent = '';
+    else if (h.length === 1) note.textContent = 'Used for all days. When your rate changes, type the new rate here and pick the date it starts.';
+    else note.textContent = 'Current rate, since ' + longDate(r.from) + '. Earlier days keep their old rate.';
+
+    if (h.length < 2) { box.hidden = true; box.innerHTML = ''; return; }
+    box.hidden = false;
+    box.innerHTML = '<div class="rh-title">Rate history</div>' + h.map((x, i) =>
+      '<div class="rh-row">' +
+        '<span class="rh-from">' + (i ? 'From ' + longDate(x.from) : 'Before ' + longDate(h[1].from)) + '</span>' +
+        '<span class="rh-val">' + rateText(x) + '</span>' +
+        (i ? '<button class="rh-del" type="button" data-i="' + i + '" aria-label="Remove rate starting ' + longDate(x.from) + '">✕</button>' : '') +
+      '</div>'
+    ).join('');
   }
 
   function setEntry(key, e) {
@@ -299,8 +518,15 @@
       const rows = sec.querySelector('.rows');
       for (let d = a; d <= b; d++) {
         const wd = new Date(vy, vm, d).getDay();
-        const key = vy + '-' + pad(vm + 1) + '-' + pad(d);
+        const key = isoDate(vy, vm, d);
         const isToday = d === t.getDate() && vm === t.getMonth() && vy === t.getFullYear();
+        const newRate = data.rateHistory.find((r, i) => i && r.from === key);
+        if (newRate) {
+          const strip = document.createElement('div');
+          strip.className = 'ratechg';
+          strip.textContent = 'New rate from ' + d + ' ' + MONTHS[vm].slice(0, 3) + ': ' + rateText(newRate);
+          rows.appendChild(strip);
+        }
         const row = document.createElement('div');
         row.className = 'row' + (wd === FRIDAY ? ' fri' : '') + (isToday ? ' today' : '');
         row.dataset.key = key;
@@ -325,16 +551,16 @@
   }
 
   function recalc() {
-    const dayRate = num(data.rates.day), otRate = num(data.rates.ot);
     const M = { p: 0, a: 0, oth: 0, sal: 0, otp: 0 };
 
     document.querySelectorAll('.period').forEach((sec, i) => {
       const P = { p: 0, a: 0, oth: 0, sal: 0, otp: 0 };
       sec.querySelectorAll('.row').forEach(row => {
         const e = data.days[row.dataset.key] || {};
+        const rate = rateFor(row.dataset.key); // the rate that applied on this date
         const hours = num(e.ot);
-        const sal = e.s === 'P' ? dayRate : 0;
-        const otp = hours * otRate;
+        const sal = e.s === 'P' ? rate.day : 0;
+        const otp = hours * rate.ot;
         if (e.s === 'P') P.p++;
         if (e.s === 'A') P.a++;
         P.oth += hours; P.sal += sal; P.otp += otp;
@@ -357,7 +583,7 @@
     $('#mOtH').textContent = fmt(M.oth);
     $('#mSal').textContent = money(M.sal);
     $('#mOtP').textContent = money(M.otp);
-    $('#rateHint').hidden = dayRate > 0 || otRate > 0;
+    $('#rateHint').hidden = data.rateHistory.some(r => r.day || r.ot);
   }
 
   // Day interactions
@@ -412,11 +638,13 @@
 
   // Backup / restore
   $('#exportBtn').addEventListener('click', () => {
-    const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+    const json = JSON.stringify(data, null, 2);
+    const name = 'ar-salary-backup-' + todayIso() + '.json';
+    if (window.AndroidApp) { AndroidApp.saveBackup(json, name); return; }
+    const blob = new Blob([json], { type: 'application/json' });
     const a = document.createElement('a');
-    const t = new Date();
     a.href = URL.createObjectURL(blob);
-    a.download = 'salary-backup-' + t.getFullYear() + '-' + pad(t.getMonth() + 1) + '-' + pad(t.getDate()) + '.json';
+    a.download = name;
     document.body.appendChild(a);
     a.click();
     a.remove();
@@ -434,14 +662,16 @@
       if (!d) { alert('That file is not a valid salary backup.'); return; }
       if (!confirm('Replace all current data with this backup?')) return;
       data = d;
-      save();
-      fillRates();
-      render();
+      afterRateChange();
     };
     reader.readAsText(file);
   });
 
+  // Browser tab icon = the header logo
+  $('#favicon').href = 'data:image/svg+xml,' + encodeURIComponent($('#logo').outerHTML);
+
   fillRates();
+  renderRates();
   render();
 })();
 </script>
