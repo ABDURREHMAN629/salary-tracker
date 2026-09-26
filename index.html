@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Salary Tracker</title>
+<style>
+  :root {
+    --bg: #f4f5f7;
+    --card: #ffffff;
+    --text: #1b2130;
+    --muted: #6a7282;
+    --line: #e4e7ec;
+    --field: #f8f9fb;
+    --accent: #2563eb;
+    --accent-soft: #eaf0ff;
+    --p-bg: #16a34a;
+    --p-fg: #ffffff;
+    --a-bg: #64748b;
+    --a-fg: #ffffff;
+    --friday: #dc2626;
+    --friday-bg: #fef2f2;
+    --shadow: 0 1px 2px rgba(16, 24, 40, .05), 0 1px 3px rgba(16, 24, 40, .07);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0f1218;
+      --card: #181d26;
+      --text: #e6e9ef;
+      --muted: #97a0b1;
+      --line: #2a313d;
+      --field: #11151c;
+      --accent: #6b95ff;
+      --accent-soft: #1d2842;
+      --p-bg: #22c55e;
+      --p-fg: #04210f;
+      --a-bg: #94a3b8;
+      --a-fg: #0f172a;
+      --friday: #f87171;
+      --friday-bg: #2a1719;
+      --shadow: none;
+    }
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font: 15px/1.4 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    -webkit-text-size-adjust: 100%;
+  }
+  .wrap { max-width: 760px; margin: 0 auto; padding: 16px 16px 48px; }
+  button { font: inherit; cursor: pointer; }
+
+  /* Header */
+  header { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin-bottom: 14px; }
+  h1 { font-size: 20px; margin: 0; }
+  .nav { display: flex; align-items: center; gap: 6px; }
+  .nav .month { min-width: 140px; text-align: center; font-weight: 650; }
+  .iconbtn {
+    width: 36px; height: 36px; border-radius: 10px;
+    border: 1px solid var(--line); background: var(--card); color: var(--text);
+    font-size: 18px; line-height: 1;
+  }
+  .ghost {
+    border: 1px solid var(--line); background: var(--card); color: var(--text);
+    border-radius: 10px; padding: 7px 12px; font-size: 13px; white-space: nowrap;
+  }
+  .ghost:disabled { opacity: .45; cursor: default; }
+
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 14px; box-shadow: var(--shadow); margin-bottom: 14px; }
+
+  /* Rates */
+  .rates { padding: 14px; display: grid; grid-template-columns: 1fr 1fr 80px; gap: 10px; }
+  .rates label { display: flex; flex-direction: column; gap: 5px; font-size: 12px; color: var(--muted); font-weight: 600; }
+  input {
+    font: inherit; color: var(--text); background: var(--field);
+    border: 1px solid var(--line); border-radius: 10px; padding: 9px 10px; width: 100%; min-width: 0;
+  }
+  input:focus { outline: 2px solid var(--accent); outline-offset: -1px; border-color: transparent; }
+  input[type=number] { -moz-appearance: textfield; }
+  input[type=number]::-webkit-inner-spin-button,
+  input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
+
+  /* Month summary */
+  .summary { padding: 16px; }
+  .summary .lbl { font-size: 13px; color: var(--muted); font-weight: 600; }
+  .summary .big { font-size: 30px; font-weight: 750; letter-spacing: -.01em; font-variant-numeric: tabular-nums; margin: 2px 0 12px; }
+  .sgrid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+  .sgrid div { background: var(--field); border: 1px solid var(--line); border-radius: 10px; padding: 8px 10px; min-width: 0; }
+  .sgrid span { display: block; font-size: 11.5px; color: var(--muted); }
+  .sgrid b { display: block; font-size: 16px; font-variant-numeric: tabular-nums; overflow-wrap: anywhere; }
+  .halves { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px; }
+  .halves a {
+    display: flex; justify-content: space-between; align-items: baseline; gap: 8px;
+    text-decoration: none; color: var(--text); background: var(--accent-soft);
+    border-radius: 10px; padding: 9px 12px; font-size: 13px; font-weight: 600;
+  }
+  .halves a b { font-size: 15px; font-variant-numeric: tabular-nums; }
+  .hint { margin: 10px 0 0; font-size: 13px; color: var(--muted); }
+  .hint[hidden] { display: none; }
+
+  /* Period */
+  .period { overflow: hidden; scroll-margin-top: 12px; }
+  .phead { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; padding: 14px 14px 8px; }
+  .phead h2 { font-size: 17px; margin: 0; }
+  .pmeta { font-size: 13px; color: var(--muted); margin-top: 2px; }
+  .ptotal { text-align: right; }
+  .ptotal span { display: block; font-size: 12px; color: var(--muted); font-weight: 600; }
+  .ptotal b { font-size: 20px; font-variant-numeric: tabular-nums; }
+  .pbreak { display: flex; align-items: center; gap: 8px 16px; flex-wrap: wrap; padding: 0 14px 12px; font-size: 13px; color: var(--muted); }
+  .pbreak b { color: var(--text); font-variant-numeric: tabular-nums; }
+  .pbreak .fill { margin-left: auto; }
+
+  .row, .rowhead {
+    display: grid; grid-template-columns: 46px 84px 80px 1fr; gap: 8px;
+    align-items: center; padding: 7px 14px;
+  }
+  .rowhead {
+    font-size: 11px; text-transform: uppercase; letter-spacing: .04em; color: var(--muted); font-weight: 600;
+    border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); padding-top: 8px; padding-bottom: 8px;
+  }
+  .rowhead span:last-child { text-align: right; }
+  .row { border-bottom: 1px solid var(--line); }
+  .row:last-child { border-bottom: 0; }
+  .date { display: flex; flex-direction: column; line-height: 1.1; }
+  .date .dn { font-size: 17px; font-weight: 700; font-variant-numeric: tabular-nums; }
+  .date .dw { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: .04em; font-weight: 600; }
+
+  .row.fri { background: var(--friday-bg); box-shadow: inset 4px 0 0 var(--friday); }
+  .row.fri .dn, .row.fri .dw { color: var(--friday); }
+  .row.today .dw::after { content: "today"; display: block; color: var(--accent); text-transform: none; letter-spacing: 0; }
+  .row.today { outline: 2px solid var(--accent); outline-offset: -2px; }
+
+  .att { display: flex; gap: 6px; }
+  .att button {
+    width: 38px; height: 34px; border-radius: 9px;
+    border: 1px solid var(--line); background: var(--field); color: var(--muted); font-weight: 700;
+  }
+  .att .p[aria-pressed="true"] { background: var(--p-bg); border-color: var(--p-bg); color: var(--p-fg); }
+  .att .a[aria-pressed="true"] { background: var(--a-bg); border-color: var(--a-bg); color: var(--a-fg); }
+
+  .ot { position: relative; }
+  .ot input { padding: 7px 22px 7px 9px; text-align: right; }
+  .ot span { position: absolute; right: 9px; top: 50%; transform: translateY(-50%); font-size: 12px; color: var(--muted); pointer-events: none; }
+
+  .amt { text-align: right; font-weight: 650; font-variant-numeric: tabular-nums; }
+  .amt.zero { color: var(--muted); font-weight: 400; }
+
+  footer { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; margin-top: 18px; }
+  footer p { width: 100%; text-align: center; font-size: 12px; color: var(--muted); margin: 0 0 4px; }
+
+  @media (max-width: 520px) {
+    .sgrid { grid-template-columns: 1fr 1fr; }
+    .summary .big { font-size: 26px; }
+  }
+  @media print {
+    body { background: #fff; }
+    .nav, .fill, footer, .halves { display: none !important; }
+    .card { box-shadow: none; break-inside: avoid; }
+    .ot input { border: 0; background: none; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>Salary Tracker</h1>
+    <div class="nav">
+      <button class="iconbtn" id="prev" type="button" aria-label="Previous month">&#8249;</button>
+      <div class="month" id="monthLabel"></div>
+      <button class="iconbtn" id="next" type="button" aria-label="Next month">&#8250;</button>
+      <button class="ghost" id="todayBtn" type="button">Today</button>
+    </div>
+  </header>
+
+  <section class="card rates">
+    <label>Salary per day
+      <input id="rateDay" type="number" inputmode="decimal" min="0" step="any" placeholder="e.g. 100">
+    </label>
+    <label>Overtime per hour
+      <input id="rateOt" type="number" inputmode="decimal" min="0" step="any" placeholder="e.g. 12.5">
+    </label>
+    <label>Currency
+      <input id="rateCur" type="text" maxlength="6" placeholder="Rs">
+    </label>
+  </section>
+
+  <section class="card summary">
+    <div class="lbl" id="sumLabel"></div>
+    <div class="big" id="mTotal">0</div>
+    <div class="sgrid">
+      <div><span>Days present</span><b id="mDays">0</b></div>
+      <div><span>Overtime hours</span><b id="mOtH">0</b></div>
+      <div><span>Salary</span><b id="mSal">0</b></div>
+      <div><span>Overtime pay</span><b id="mOtP">0</b></div>
+    </div>
+    <div class="halves">
+      <a href="#period0"><span id="hLabel0">1–15</span><b id="h0">0</b></a>
+      <a href="#period1"><span id="hLabel1">16–30</span><b id="h1">0</b></a>
+    </div>
+    <p class="hint" id="rateHint">Enter your salary per day and overtime per hour above to see your earnings.</p>
+  </section>
+
+  <div id="periods"></div>
+
+  <footer>
+    <p>Your data is saved in this browser. Download a backup now and then to keep it safe.</p>
+    <button class="ghost" id="exportBtn" type="button">Download backup</button>
+    <button class="ghost" id="importBtn" type="button">Restore backup</button>
+    <input type="file" id="importFile" accept="application/json,.json" hidden>
+  </footer>
+</div>
+
+<script>
+(function () {
+  const KEY = 'salaryTracker.v1';
+  const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+  const WD = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+  const FRIDAY = 5;
+  const $ = s => document.querySelector(s);
+  const pad = n => String(n).padStart(2, '0');
+
+  let data = load();
+  const now = new Date();
+  let vy = now.getFullYear(), vm = now.getMonth();
+
+  function blank() { return { rates: { day: '', ot: '', cur: '' }, days: {} }; }
+  function normalize(d) {
+    if (!d || typeof d !== 'object' || typeof d.days !== 'object') return null;
+    return { rates: Object.assign(blank().rates, d.rates), days: d.days };
+  }
+  function load() {
+    try { return normalize(JSON.parse(localStorage.getItem(KEY))) || blank(); } catch (e) { return blank(); }
+  }
+  function save() {
+    try { localStorage.setItem(KEY, JSON.stringify(data)); } catch (e) {}
+  }
+
+  const num = v => { const n = parseFloat(v); return isFinite(n) && n > 0 ? n : 0; };
+  const fmt = n => n.toLocaleString('en-US', { maximumFractionDigits: 2 });
+  const money = n => {
+    const whole = Math.round(n * 100) % 100 === 0;
+    const s = n.toLocaleString('en-US', { minimumFractionDigits: whole ? 0 : 2, maximumFractionDigits: 2 });
+    const cur = (data.rates.cur || '').trim();
+    return cur ? cur + ' ' + s : s;
+  };
+  const isFuture = (y, m, d) => { const t = new Date(); t.setHours(0, 0, 0, 0); return new Date(y, m, d) > t; };
+
+  // Rates: entered once, saved, used for every day
+  const rateInputs = { day: $('#rateDay'), ot: $('#rateOt'), cur: $('#rateCur') };
+  function fillRates() { for (const k in rateInputs) rateInputs[k].value = data.rates[k] || ''; }
+  for (const k in rateInputs) {
+    rateInputs[k].addEventListener('input', e => { data.rates[k] = e.target.value; save(); recalc(); });
+  }
+
+  function setEntry(key, e) {
+    const clean = {};
+    if (e.s) clean.s = e.s;
+    if (num(e.ot)) clean.ot = num(e.ot);
+    if (Object.keys(clean).length) data.days[key] = clean; else delete data.days[key];
+    save();
+  }
+
+  function paintRow(row) {
+    const e = data.days[row.dataset.key] || {};
+    row.querySelector('.p').setAttribute('aria-pressed', e.s === 'P');
+    row.querySelector('.a').setAttribute('aria-pressed', e.s === 'A');
+  }
+
+  function render() {
+    const dim = new Date(vy, vm + 1, 0).getDate();
+    const t = new Date();
+    $('#monthLabel').textContent = MONTHS[vm] + ' ' + vy;
+    $('#sumLabel').textContent = MONTHS[vm] + ' ' + vy + ' total';
+
+    const host = $('#periods');
+    host.innerHTML = '';
+    [[1, 15], [16, dim]].forEach(([a, b], i) => {
+      $('#hLabel' + i).textContent = a + '–' + b;
+      const sec = document.createElement('section');
+      sec.className = 'card period';
+      sec.id = 'period' + i;
+      sec.innerHTML =
+        '<div class="phead">' +
+          '<div><h2>' + a + ' – ' + b + ' ' + MONTHS[vm] + '</h2><div class="pmeta" data-meta></div></div>' +
+          '<div class="ptotal"><span>15-day total</span><b data-total></b></div>' +
+        '</div>' +
+        '<div class="pbreak">' +
+          '<span>Salary <b data-sal></b></span>' +
+          '<span>Overtime <b data-otp></b></span>' +
+          '<button class="ghost fill" type="button" title="Marks empty days up to today as P (Fridays are skipped)">Fill P till today</button>' +
+        '</div>' +
+        '<div class="rowhead"><span>Date</span><span>Attend.</span><span>OT hours</span><span>Earned</span></div>' +
+        '<div class="rows"></div>';
+      sec.querySelector('.fill').disabled = isFuture(vy, vm, a);
+
+      const rows = sec.querySelector('.rows');
+      for (let d = a; d <= b; d++) {
+        const wd = new Date(vy, vm, d).getDay();
+        const key = vy + '-' + pad(vm + 1) + '-' + pad(d);
+        const isToday = d === t.getDate() && vm === t.getMonth() && vy === t.getFullYear();
+        const row = document.createElement('div');
+        row.className = 'row' + (wd === FRIDAY ? ' fri' : '') + (isToday ? ' today' : '');
+        row.dataset.key = key;
+        row.dataset.day = d;
+        row.dataset.wd = wd;
+        row.innerHTML =
+          '<div class="date"><span class="dn">' + pad(d) + '</span><span class="dw">' + WD[wd] + '</span></div>' +
+          '<div class="att">' +
+            '<button type="button" class="p" aria-label="Present on ' + d + ' ' + MONTHS[vm] + '">P</button>' +
+            '<button type="button" class="a" aria-label="Absent on ' + d + ' ' + MONTHS[vm] + '">A</button>' +
+          '</div>' +
+          '<div class="ot"><input type="number" inputmode="decimal" min="0" step="0.5" placeholder="0" aria-label="Overtime hours on ' + d + ' ' + MONTHS[vm] + '"><span>h</span></div>' +
+          '<div class="amt"></div>';
+        const e = data.days[key];
+        if (e && e.ot) row.querySelector('input').value = e.ot;
+        paintRow(row);
+        rows.appendChild(row);
+      }
+      host.appendChild(sec);
+    });
+    recalc();
+  }
+
+  function recalc() {
+    const dayRate = num(data.rates.day), otRate = num(data.rates.ot);
+    const M = { p: 0, a: 0, oth: 0, sal: 0, otp: 0 };
+
+    document.querySelectorAll('.period').forEach((sec, i) => {
+      const P = { p: 0, a: 0, oth: 0, sal: 0, otp: 0 };
+      sec.querySelectorAll('.row').forEach(row => {
+        const e = data.days[row.dataset.key] || {};
+        const hours = num(e.ot);
+        const sal = e.s === 'P' ? dayRate : 0;
+        const otp = hours * otRate;
+        if (e.s === 'P') P.p++;
+        if (e.s === 'A') P.a++;
+        P.oth += hours; P.sal += sal; P.otp += otp;
+
+        const amt = row.querySelector('.amt');
+        const v = sal + otp;
+        amt.textContent = v ? fmt(v) : '—';
+        amt.classList.toggle('zero', !v);
+      });
+      sec.querySelector('[data-meta]').textContent = P.p + ' present · ' + P.a + ' absent · ' + fmt(P.oth) + ' OT hrs';
+      sec.querySelector('[data-sal]').textContent = money(P.sal);
+      sec.querySelector('[data-otp]').textContent = money(P.otp);
+      sec.querySelector('[data-total]').textContent = money(P.sal + P.otp);
+      $('#h' + i).textContent = money(P.sal + P.otp);
+      for (const k in M) M[k] += P[k];
+    });
+
+    $('#mTotal').textContent = money(M.sal + M.otp);
+    $('#mDays').textContent = M.p;
+    $('#mOtH').textContent = fmt(M.oth);
+    $('#mSal').textContent = money(M.sal);
+    $('#mOtP').textContent = money(M.otp);
+    $('#rateHint').hidden = dayRate > 0 || otRate > 0;
+  }
+
+  // Day interactions
+  const periods = $('#periods');
+  periods.addEventListener('click', ev => {
+    const btn = ev.target.closest('.att button');
+    if (btn) {
+      const row = btn.closest('.row');
+      const val = btn.classList.contains('p') ? 'P' : 'A';
+      const e = Object.assign({}, data.days[row.dataset.key]);
+      e.s = e.s === val ? '' : val; // tap again to clear
+      setEntry(row.dataset.key, e);
+      paintRow(row);
+      recalc();
+      return;
+    }
+    const fill = ev.target.closest('.fill');
+    if (fill) {
+      fill.closest('.period').querySelectorAll('.row').forEach(row => {
+        if (+row.dataset.wd === FRIDAY || isFuture(vy, vm, +row.dataset.day)) return;
+        const e = Object.assign({}, data.days[row.dataset.key]);
+        if (!e.s) { e.s = 'P'; setEntry(row.dataset.key, e); paintRow(row); }
+      });
+      recalc();
+    }
+  });
+  periods.addEventListener('input', ev => {
+    if (!ev.target.matches('.ot input')) return;
+    const row = ev.target.closest('.row');
+    const e = Object.assign({}, data.days[row.dataset.key]);
+    e.ot = num(ev.target.value);
+    setEntry(row.dataset.key, e);
+    recalc();
+  });
+
+  // Month navigation
+  function shift(delta) {
+    vm += delta;
+    if (vm < 0) { vm = 11; vy--; }
+    if (vm > 11) { vm = 0; vy++; }
+    render();
+  }
+  $('#prev').addEventListener('click', () => shift(-1));
+  $('#next').addEventListener('click', () => shift(1));
+  $('#todayBtn').addEventListener('click', () => {
+    const t = new Date();
+    vy = t.getFullYear(); vm = t.getMonth();
+    render();
+    const row = document.querySelector('.row.today');
+    if (row) row.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  });
+
+  // Backup / restore
+  $('#exportBtn').addEventListener('click', () => {
+    const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+    const a = document.createElement('a');
+    const t = new Date();
+    a.href = URL.createObjectURL(blob);
+    a.download = 'salary-backup-' + t.getFullYear() + '-' + pad(t.getMonth() + 1) + '-' + pad(t.getDate()) + '.json';
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+  });
+  $('#importBtn').addEventListener('click', () => $('#importFile').click());
+  $('#importFile').addEventListener('change', ev => {
+    const file = ev.target.files[0];
+    ev.target.value = '';
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = () => {
+      let d = null;
+      try { d = normalize(JSON.parse(reader.result)); } catch (e) {}
+      if (!d) { alert('That file is not a valid salary backup.'); return; }
+      if (!confirm('Replace all current data with this backup?')) return;
+      data = d;
+      save();
+      fillRates();
+      render();
+    };
+    reader.readAsText(file);
+  });
+
+  fillRates();
+  render();
+})();
+</script>
+</body>
+</html>
