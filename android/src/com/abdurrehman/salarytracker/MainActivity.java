@@ -17,7 +17,6 @@ import android.widget.Toast;
 import java.io.OutputStream;
 import java.nio.charset.StandardCharsets;
 
-/** Shows the salary tracker page (assets/index.html) full screen. */
 public class MainActivity extends Activity {
     private static final int REQ_SAVE_BACKUP = 1;
     private static final int REQ_OPEN_BACKUP = 2;
@@ -38,13 +37,14 @@ public class MainActivity extends Activity {
         settings.setDomStorageEnabled(true);
 
         web.setWebViewClient(new WebViewClient() {
-            // Call / WhatsApp links open the dialer or WhatsApp instead of loading inside the app
+            // Call / WhatsApp / Email links open the dialer, WhatsApp or an email app instead of loading inside the app
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
                 Uri uri = request.getUrl();
                 if ("file".equals(uri.getScheme())) return false;
+                String action = "mailto".equals(uri.getScheme()) ? Intent.ACTION_SENDTO : Intent.ACTION_VIEW;
                 try {
-                    startActivity(new Intent(Intent.ACTION_VIEW, uri));
+                    startActivity(new Intent(action, uri));
                 } catch (Exception e) {
                     Toast.makeText(MainActivity.this, "No app found to open this link", Toast.LENGTH_SHORT).show();
                 }

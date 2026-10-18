@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<!-- Source for assets/og-image.png (1200x630 link preview). Rendered by tools/make-images.sh. -->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@600&display=block" rel="stylesheet">
+<style>
+  html, body { margin: 0; width: 1200px; height: 630px; overflow: hidden; }
+  body {
+    font-family: "Segoe UI", system-ui, sans-serif; color: #fff;
+    background: linear-gradient(135deg, #0891b2 0%, #4f46e5 50%, #db2777 100%);
+    position: relative;
+  }
+  .blob { position: absolute; border-radius: 50%; background: rgba(255,255,255,.10); }
+  .left { position: absolute; left: 72px; top: 64px; width: 640px; }
+  .brand { display: flex; align-items: center; gap: 18px; }
+  .brand img { width: 84px; height: 84px; filter: drop-shadow(0 6px 14px rgba(0,0,0,.25)); }
+  .brand b { font-size: 40px; letter-spacing: -.01em; }
+  h1 { font-size: 58px; line-height: 1.08; margin: 34px 0 0; letter-spacing: -.02em; font-weight: 800; }
+  .ur { font-family: "Noto Nastaliq Urdu", "Segoe UI", serif; font-size: 34px; line-height: 2.1; margin: 10px 0 0; direction: rtl; text-align: left; }
+  .chips { display: flex; gap: 12px; margin-top: 18px; }
+  .chips span { background: rgba(255,255,255,.18); border: 1px solid rgba(255,255,255,.35); border-radius: 999px; padding: 9px 18px; font-size: 22px; font-weight: 600; }
+  .phone {
+    position: absolute; right: 70px; top: 46px; width: 300px; height: 620px; border-radius: 38px;
+    background: #0f172a; padding: 12px; box-shadow: 0 30px 60px rgba(15,23,42,.45);
+    transform: rotate(4deg);
+  }
+  .phone img { width: 100%; height: 100%; object-fit: cover; object-position: top; border-radius: 28px; display: block; }
+</style>
+</head>
+<body>
+  <div class="blob" style="width:420px;height:420px;left:-140px;top:-160px"></div>
+  <div class="blob" style="width:360px;height:360px;right:260px;bottom:-220px"></div>
+  <div class="left">
+    <div class="brand"><img src="../assets/logo.svg" alt=""><b>AR Salary Tracker</b></div>
+    <h1>Free Daily Wage &amp; Overtime Calculator</h1>
+    <p class="ur" lang="ur">دیہاڑی اور اوور ٹائم کا آسان حساب</p>
+    <div class="chips"><span>Android</span><span>Free</span><span>Works offline</span></div>
+  </div>
+  <div class="phone"><img src="../assets/screenshot-summary.png" alt=""></div>
+</body>
+</html>

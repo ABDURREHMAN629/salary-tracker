@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Builds build/salary-tracker.apk from ../index.html using the Android SDK
+# Builds build/salary-tracker.apk from ../app/index.html using the Android SDK
 # build-tools and Android Studio's bundled JDK (no Gradle needed).
 #
 #   bash android/build.sh            build the APK
@@ -14,7 +14,7 @@ JBR="/c/Program Files/Android/Android Studio/jbr/bin"
 ADB="$SDK/platform-tools/adb.exe"
 
 VERSION_CODE="$(date +%y%m%d%H)"   # grows with each build so updates install over the old app
-VERSION_NAME="1.0"
+VERSION_NAME="1.1"
 
 # Signing key: created once, kept outside git. Keep it — updates must be signed with the same key.
 if [ ! -f salary.keystore ]; then
@@ -24,14 +24,13 @@ if [ ! -f salary.keystore ]; then
   "$JBR/keytool.exe" -genkeypair -keystore salary.keystore -storepass "$KS_PASS" -keypass "$KS_PASS" \
     -alias salary -keyalg RSA -keysize 2048 -validity 10000 -dname "CN=Salary Tracker" -noprompt
 fi
-# shellcheck disable=SC1091
 source keystore.properties
 export KS_PASS
 
 echo "Compiling resources..."
 rm -rf build
 mkdir -p build/assets build/classes build/gen build/dex
-cp ../index.html build/assets/index.html
+cp ../app/index.html build/assets/index.html
 "$BT/aapt2.exe" compile --dir res -o build/res.zip
 "$BT/aapt2.exe" link -o build/base.apk -I "$ANDROID_JAR" --manifest AndroidManifest.xml \
   -A build/assets --java build/gen --min-sdk-version 26 --target-sdk-version 34 \

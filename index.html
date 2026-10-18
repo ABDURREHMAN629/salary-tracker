@@ -3,677 +3,404 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>AR Salary Tracker</title>
-<link rel="icon" id="favicon">
+<title>AR Salary Tracker – Free Daily Wage &amp; Overtime Calculator App (Android)</title>
+<meta name="description" content="Free app for daily-wage and factory workers: mark attendance, add overtime hours, and see your 15-day and monthly salary. Works offline. Download the Android APK.">
+<meta name="keywords" content="daily wage calculator, overtime calculator, salary calculator app, dihari calculator, attendance tracker, factory workers, labour salary app, 15 days salary, Pakistan, Urdu, Android APK, تنخواہ کیلکولیٹر, اوور ٹائم کیلکولیٹر, دیہاڑی کا حساب">
+<meta name="author" content="AR">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<link rel="canonical" href="https://abdurrehman629.github.io/salary-tracker/">
+<meta name="theme-color" content="#4f46e5">
+
+<link rel="icon" href="assets/logo.svg" type="image/svg+xml">
+<link rel="icon" href="assets/icon-512.png" type="image/png" sizes="512x512">
+<link rel="apple-touch-icon" href="assets/icon-512.png">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="AR Salary Tracker">
+<meta property="og:title" content="AR Salary Tracker – Free Daily Wage &amp; Overtime Calculator">
+<meta property="og:description" content="Mark attendance, add overtime hours, and see your 15-day and monthly salary. Free Android app for daily-wage workers. دیہاڑی اور اوور ٹائم کا آسان حساب۔">
+<meta property="og:url" content="https://abdurrehman629.github.io/salary-tracker/">
+<meta property="og:image" content="https://abdurrehman629.github.io/salary-tracker/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="AR Salary Tracker app showing a monthly salary and overtime total">
+<meta property="og:locale" content="en_US">
+<meta property="og:locale:alternate" content="ur_PK">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="AR Salary Tracker – Free Daily Wage &amp; Overtime Calculator">
+<meta name="twitter:description" content="Mark attendance, add overtime hours, and see your 15-day and monthly salary. Free Android app.">
+<meta name="twitter:image" content="https://abdurrehman629.github.io/salary-tracker/assets/og-image.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400;600&display=swap" rel="stylesheet">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "AR Salary Tracker",
+  "alternateName": "اے آر سیلری ٹریکر",
+  "description": "Free daily wage and overtime calculator for factory and daily-wage workers. Mark attendance, add overtime hours, and see 15-day and monthly salary totals. Works offline.",
+  "url": "https://abdurrehman629.github.io/salary-tracker/",
+  "downloadUrl": "https://github.com/ABDURREHMAN629/salary-tracker/releases/latest/download/AR-Salary-Tracker.apk",
+  "installUrl": "https://github.com/ABDURREHMAN629/salary-tracker/releases/latest",
+  "operatingSystem": "Android 8.0 or newer",
+  "applicationCategory": "FinanceApplication",
+  "softwareVersion": "1.1",
+  "fileSize": "25KB",
+  "inLanguage": ["en", "ur"],
+  "isAccessibleForFree": true,
+  "image": "https://abdurrehman629.github.io/salary-tracker/assets/icon-512.png",
+  "screenshot": [
+    "https://abdurrehman629.github.io/salary-tracker/assets/screenshot-summary.png",
+    "https://abdurrehman629.github.io/salary-tracker/assets/screenshot-days.png"
+  ],
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "PKR" },
+  "author": { "@type": "Person", "name": "AR", "telephone": "+923247440629", "email": "gabdurehman493@gmail.com" }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    { "@type": "Question", "name": "Is AR Salary Tracker free?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Yes. It is completely free, with no ads and no sign-up." } },
+    { "@type": "Question", "name": "Does the app need internet?",
+      "acceptedAnswer": { "@type": "Answer", "text": "No. After you install it, the app works fully offline." } },
+    { "@type": "Question", "name": "Is my salary data private?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Yes. Your data is saved only on your own phone and is never uploaded. You can download a backup file to keep a copy." } },
+    { "@type": "Question", "name": "My daily wage increased. Will my old days change?",
+      "acceptedAnswer": { "@type": "Answer", "text": "No. Type the new rate and choose the date it starts. Days before that date keep the old rate." } },
+    { "@type": "Question", "name": "Why does my phone show a warning when installing?",
+      "acceptedAnswer": { "@type": "Answer", "text": "The app is not on the Play Store, so Android warns about it. Tap More details, then Install anyway." } },
+    { "@type": "Question", "name": "Does it work on iPhone?",
+      "acceptedAnswer": { "@type": "Answer", "text": "The app file is for Android 8 or newer. On iPhone or a computer, you can use the online version in your browser." } }
+  ]
+}
+</script>
+
 <style>
   :root {
-    --bg: #f4f5f7;
+    --bg: #f6f7fb;
     --card: #ffffff;
-    --text: #1b2130;
-    --muted: #6a7282;
-    --line: #e4e7ec;
-    --field: #f8f9fb;
-    --accent: #2563eb;
-    --accent-soft: #eaf0ff;
+    --text: #172033;
+    --muted: #5d6679;
+    --line: #e3e6ee;
+    --accent: #4f46e5;
+    --accent-2: #db2777;
+    --accent-soft: #eef0ff;
     --on-accent: #ffffff;
-    --p-bg: #16a34a;
-    --p-fg: #ffffff;
-    --a-bg: #64748b;
-    --a-fg: #ffffff;
-    --friday: #dc2626;
-    --friday-bg: #fef2f2;
-    --brand-a: #4f46e5;
-    --brand-b: #db2777;
-    --shadow: 0 1px 2px rgba(16, 24, 40, .05), 0 1px 3px rgba(16, 24, 40, .07);
+    --hero-1: #0891b2;
+    --hero-2: #4f46e5;
+    --hero-3: #db2777;
+    --shadow: 0 1px 2px rgba(16, 24, 40, .05), 0 8px 24px rgba(16, 24, 40, .06);
   }
   @media (prefers-color-scheme: dark) {
     :root {
-      --bg: #0f1218;
-      --card: #181d26;
-      --text: #e6e9ef;
-      --muted: #97a0b1;
-      --line: #2a313d;
-      --field: #11151c;
-      --accent: #6b95ff;
-      --accent-soft: #1d2842;
-      --on-accent: #0b1220;
-      --p-bg: #22c55e;
-      --p-fg: #04210f;
-      --a-bg: #94a3b8;
-      --a-fg: #0f172a;
-      --friday: #f87171;
-      --friday-bg: #2a1719;
-      --brand-a: #818cf8;
-      --brand-b: #f472b6;
+      --bg: #0e1117;
+      --card: #171c26;
+      --text: #e7eaf1;
+      --muted: #9aa3b6;
+      --line: #283041;
+      --accent: #8b93ff;
+      --accent-2: #f472b6;
+      --accent-soft: #1d2340;
+      --on-accent: #0b1020;
+      --hero-1: #0e7490;
+      --hero-2: #3730a3;
+      --hero-3: #9d174d;
       --shadow: none;
     }
   }
-
   * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
   body {
-    margin: 0;
-    background: var(--bg);
-    color: var(--text);
-    font: 15px/1.4 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    margin: 0; background: var(--bg); color: var(--text);
+    font: 16px/1.6 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
     -webkit-text-size-adjust: 100%;
   }
-  .wrap { max-width: 760px; margin: 0 auto; padding: 16px 16px 48px; }
-  button { font: inherit; cursor: pointer; }
+  a { color: var(--accent); }
+  img { max-width: 100%; height: auto; }
+  .wrap { max-width: 1040px; margin: 0 auto; padding: 0 16px; }
+  section { padding: 56px 0; scroll-margin-top: 64px; }
+  h2 { font-size: clamp(24px, 4vw, 32px); line-height: 1.2; margin: 0 0 10px; letter-spacing: -.01em; }
+  .sub { color: var(--muted); margin: 0 0 28px; max-width: 640px; }
 
-  /* Header */
-  header { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin-bottom: 14px; }
-  h1 { font-size: 20px; margin: 0; line-height: 1.15; }
-  .brand { display: flex; align-items: center; gap: 10px; }
-  .logo { width: 42px; height: 42px; flex: none; }
-  .byline {
-    font-size: 12.5px; font-weight: 650; color: var(--brand-a);
-    background: linear-gradient(90deg, var(--brand-a), var(--brand-b));
-    -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
-  }
-  .nav { display: flex; align-items: center; gap: 6px; }
-  .nav .month { min-width: 140px; text-align: center; font-weight: 650; }
-  .iconbtn {
-    width: 36px; height: 36px; border-radius: 10px;
-    border: 1px solid var(--line); background: var(--card); color: var(--text);
-    font-size: 18px; line-height: 1;
-  }
-  .ghost {
-    border: 1px solid var(--line); background: var(--card); color: var(--text);
-    border-radius: 10px; padding: 7px 12px; font-size: 13px; white-space: nowrap;
-  }
-  .ghost:disabled { opacity: .45; cursor: default; }
+  .top { position: sticky; top: 0; z-index: 10; background: color-mix(in srgb, var(--bg) 88%, transparent); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); }
+  .top .wrap { display: flex; align-items: center; justify-content: space-between; gap: 12px; height: 60px; }
+  .brand { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--text); font-weight: 750; }
+  .brand img { width: 34px; height: 34px; }
+  .top nav { display: flex; gap: 18px; font-size: 15px; }
+  .top nav a { color: var(--muted); text-decoration: none; font-weight: 600; }
+  .top nav a:hover { color: var(--text); }
+  .top nav .ur-link { font-family: "Noto Nastaliq Urdu", serif; line-height: 1; }
 
-  .card { background: var(--card); border: 1px solid var(--line); border-radius: 14px; box-shadow: var(--shadow); margin-bottom: 14px; }
-
-  /* Rates */
-  .rates { padding: 14px; }
-  .rgrid { display: grid; grid-template-columns: 1fr 1fr 80px; gap: 10px; }
-  .rates label { display: flex; flex-direction: column; gap: 5px; font-size: 12px; color: var(--muted); font-weight: 600; }
-  .rates input.changed { border-color: var(--accent); background: var(--card); }
-  .rnote { margin: 8px 0 0; font-size: 12.5px; color: var(--muted); }
-  .rnote:empty { display: none; }
-  .rpending { margin-top: 12px; padding: 12px; border-radius: 12px; background: var(--accent-soft); font-size: 13.5px; }
-  .rpending[hidden], .rhist[hidden] { display: none; }
-  .rpend-row { display: flex; gap: 10px; align-items: flex-end; flex-wrap: wrap; margin-top: 10px; }
-  .rpend-row label { flex: 1 1 150px; }
-  .primary {
-    border: 0; background: var(--accent); color: var(--on-accent);
-    border-radius: 10px; padding: 10px 16px; font-weight: 650;
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+    padding: 13px 22px; border-radius: 12px; font-weight: 700; text-decoration: none; font-size: 16px;
+    border: 1px solid transparent;
   }
-  .rpend-alt { display: flex; justify-content: space-between; gap: 6px 14px; flex-wrap: wrap; margin-top: 10px; }
-  .linkbtn { border: 0; background: none; color: var(--accent); padding: 4px 0; font-size: 13px; text-decoration: underline; text-align: left; }
-  .rhist { margin-top: 12px; border-top: 1px solid var(--line); padding-top: 8px; }
-  .rh-title { font-size: 12px; font-weight: 600; color: var(--muted); margin-bottom: 2px; }
-  .rh-row { display: flex; align-items: center; gap: 10px; padding: 5px 0; font-size: 13.5px; }
-  .rh-from { flex: none; min-width: 112px; color: var(--muted); }
-  .rh-val { flex: 1; font-weight: 600; font-variant-numeric: tabular-nums; }
-  .rh-del {
-    flex: none; width: 30px; height: 28px; border-radius: 8px;
-    border: 1px solid var(--line); background: var(--field); color: var(--muted);
+  .btn-primary { background: #fff; color: #312e81; box-shadow: 0 6px 18px rgba(15, 23, 42, .25); }
+  .btn-ghost { background: rgba(255,255,255,.14); color: #fff; border-color: rgba(255,255,255,.4); }
+  .btn-solid { background: var(--accent); color: var(--on-accent); }
+  .btn-line { background: var(--card); color: var(--text); border-color: var(--line); }
+
+  .hero {
+    color: #fff; padding: 56px 0 0; overflow: hidden;
+    background: linear-gradient(135deg, var(--hero-1) 0%, var(--hero-2) 52%, var(--hero-3) 100%);
   }
-  .ratechg {
-    padding: 6px 14px; font-size: 12.5px; font-weight: 600;
-    color: var(--accent); background: var(--accent-soft); border-bottom: 1px solid var(--line);
+  .hero .wrap { display: grid; grid-template-columns: 1.15fr .85fr; gap: 32px; align-items: end; }
+  .hero-text { padding-bottom: 56px; }
+  .hero h1 { font-size: clamp(32px, 5.6vw, 54px); line-height: 1.07; margin: 0 0 16px; letter-spacing: -.02em; }
+  .hero .lead { font-size: clamp(17px, 2.2vw, 19px); opacity: .95; margin: 0 0 14px; max-width: 560px; }
+  .hero .ur-lead { font-family: "Noto Nastaliq Urdu", serif; font-size: 22px; line-height: 2.2; margin: 0 0 22px; }
+  .hero .cta { display: flex; gap: 12px; flex-wrap: wrap; }
+  .hero .meta { margin: 16px 0 0; font-size: 14px; opacity: .9; }
+  .phone {
+    justify-self: center; width: min(300px, 80vw); border-radius: 36px 36px 0 0; padding: 12px 12px 0;
+    background: #0f172a; box-shadow: 0 30px 60px rgba(15, 23, 42, .4);
   }
-  input {
-    font: inherit; color: var(--text); background: var(--field);
-    border: 1px solid var(--line); border-radius: 10px; padding: 9px 10px; width: 100%; min-width: 0;
+  .phone img { display: block; border-radius: 26px 26px 0 0; aspect-ratio: 412 / 560; object-fit: cover; object-position: top; width: 100%; }
+
+  .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 20px; box-shadow: var(--shadow); }
+  .card h3 { margin: 10px 0 6px; font-size: 18px; }
+  .card p { margin: 0; color: var(--muted); }
+  .ico { width: 44px; height: 44px; border-radius: 12px; display: grid; place-items: center; font-size: 22px; }
+
+  .how { display: grid; grid-template-columns: 1fr 300px; gap: 40px; align-items: center; }
+  .steps { list-style: none; padding: 0; margin: 0; counter-reset: s; display: grid; gap: 14px; }
+  .steps li { counter-increment: s; display: grid; grid-template-columns: 40px 1fr; gap: 14px; align-items: start; }
+  .steps li::before {
+    content: counter(s); width: 40px; height: 40px; border-radius: 50%; display: grid; place-items: center;
+    background: linear-gradient(135deg, var(--accent), var(--accent-2)); color: #fff; font-weight: 800;
   }
-  input:focus { outline: 2px solid var(--accent); outline-offset: -1px; border-color: transparent; }
-  input[type=number] { -moz-appearance: textfield; }
-  input[type=number]::-webkit-inner-spin-button,
-  input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
+  .steps li > div > b { display: block; }
+  .steps span { color: var(--muted); }
+  .shot { border-radius: 24px; border: 1px solid var(--line); box-shadow: var(--shadow); }
 
-  /* Month summary */
-  .summary { padding: 16px; }
-  .summary .lbl { font-size: 13px; color: var(--muted); font-weight: 600; }
-  .summary .big { font-size: 30px; font-weight: 750; letter-spacing: -.01em; font-variant-numeric: tabular-nums; margin: 2px 0 12px; }
-  .sgrid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
-  .sgrid div { background: var(--field); border: 1px solid var(--line); border-radius: 10px; padding: 8px 10px; min-width: 0; }
-  .sgrid span { display: block; font-size: 11.5px; color: var(--muted); }
-  .sgrid b { display: block; font-size: 16px; font-variant-numeric: tabular-nums; overflow-wrap: anywhere; }
-  .halves { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px; }
-  .halves a {
-    display: flex; justify-content: space-between; align-items: baseline; gap: 8px;
-    text-decoration: none; color: var(--text); background: var(--accent-soft);
-    border-radius: 10px; padding: 9px 12px; font-size: 13px; font-weight: 600;
+  .install { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .note { background: var(--accent-soft); border-radius: 14px; padding: 16px 18px; }
+  .note p { margin: 6px 0 0; }
+
+  .urdu { background: var(--card); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  [lang="ur"] { font-family: "Noto Nastaliq Urdu", "Segoe UI", serif; line-height: 2.3; }
+  .urdu h2, .urdu h3 { line-height: 2; }
+  .urdu ul, .urdu ol { padding-inline-start: 22px; }
+  .urdu li { margin-bottom: 4px; }
+  .urdu .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
+  .roman { direction: ltr; text-align: left; font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; line-height: 1.6; color: var(--muted); font-size: 15px; }
+  .ltr { direction: ltr; unicode-bidi: isolate; display: inline-block; font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+
+  details { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 14px 18px; margin-bottom: 10px; }
+  summary { cursor: pointer; font-weight: 700; }
+  details p { margin: 8px 0 0; color: var(--muted); }
+
+  .contact { text-align: center; }
+  .contact .phone-no { font-size: clamp(26px, 5vw, 34px); font-weight: 800; margin: 6px 0 4px; display: block; text-decoration: none; color: var(--text); font-variant-numeric: tabular-nums; }
+  .contact .email { display: block; margin: 0 0 18px; font-size: 18px; font-weight: 600; text-decoration: none; overflow-wrap: anywhere; }
+  .contact .cta { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+  .grad { background: linear-gradient(90deg, var(--accent), var(--accent-2)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; font-weight: 800; }
+
+  footer { border-top: 1px solid var(--line); padding: 24px 0 40px; color: var(--muted); font-size: 14px; text-align: center; }
+
+  @media (max-width: 820px) {
+    .hero .wrap, .how, .install, .urdu .cols { grid-template-columns: 1fr; }
+    .hero-text { padding-bottom: 8px; }
+    .grid { grid-template-columns: 1fr 1fr; }
+    .how .shot { max-width: 300px; justify-self: center; }
+    .top nav .hide-sm { display: none; }
   }
-  .halves a b { font-size: 15px; font-variant-numeric: tabular-nums; }
-  .hint { margin: 10px 0 0; font-size: 13px; color: var(--muted); }
-  .hint[hidden] { display: none; }
-
-  /* Period */
-  .period { overflow: hidden; scroll-margin-top: 12px; }
-  .phead { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; padding: 14px 14px 8px; }
-  .phead h2 { font-size: 17px; margin: 0; }
-  .pmeta { font-size: 13px; color: var(--muted); margin-top: 2px; }
-  .ptotal { text-align: right; }
-  .ptotal span { display: block; font-size: 12px; color: var(--muted); font-weight: 600; }
-  .ptotal b { font-size: 20px; font-variant-numeric: tabular-nums; }
-  .pbreak { display: flex; align-items: center; gap: 8px 16px; flex-wrap: wrap; padding: 0 14px 12px; font-size: 13px; color: var(--muted); }
-  .pbreak b { color: var(--text); font-variant-numeric: tabular-nums; }
-  .pbreak .fill { margin-left: auto; }
-
-  .row, .rowhead {
-    display: grid; grid-template-columns: 46px 84px 80px 1fr; gap: 8px;
-    align-items: center; padding: 7px 14px;
-  }
-  .rowhead {
-    font-size: 11px; text-transform: uppercase; letter-spacing: .04em; color: var(--muted); font-weight: 600;
-    border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); padding-top: 8px; padding-bottom: 8px;
-  }
-  .rowhead span:last-child { text-align: right; }
-  .row { border-bottom: 1px solid var(--line); }
-  .row:last-child { border-bottom: 0; }
-  .date { display: flex; flex-direction: column; line-height: 1.1; }
-  .date .dn { font-size: 17px; font-weight: 700; font-variant-numeric: tabular-nums; }
-  .date .dw { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: .04em; font-weight: 600; }
-
-  .row.fri { background: var(--friday-bg); box-shadow: inset 4px 0 0 var(--friday); }
-  .row.fri .dn, .row.fri .dw { color: var(--friday); }
-  .row.today .dw::after { content: "today"; display: block; color: var(--accent); text-transform: none; letter-spacing: 0; }
-  .row.today { outline: 2px solid var(--accent); outline-offset: -2px; }
-
-  .att { display: flex; gap: 6px; }
-  .att button {
-    width: 38px; height: 34px; border-radius: 9px;
-    border: 1px solid var(--line); background: var(--field); color: var(--muted); font-weight: 700;
-  }
-  .att .p[aria-pressed="true"] { background: var(--p-bg); border-color: var(--p-bg); color: var(--p-fg); }
-  .att .a[aria-pressed="true"] { background: var(--a-bg); border-color: var(--a-bg); color: var(--a-fg); }
-
-  .ot { position: relative; }
-  .ot input { padding: 7px 22px 7px 9px; text-align: right; }
-  .ot span { position: absolute; right: 9px; top: 50%; transform: translateY(-50%); font-size: 12px; color: var(--muted); pointer-events: none; }
-
-  .amt { text-align: right; font-weight: 650; font-variant-numeric: tabular-nums; }
-  .amt.zero { color: var(--muted); font-weight: 400; }
-
-  footer { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; margin-top: 18px; }
-  footer p { width: 100%; text-align: center; font-size: 12px; color: var(--muted); margin: 0 0 4px; }
-  a.byline { display: inline-block; text-decoration: none; }
-  .credit {
-    width: 100%; margin-top: 14px; padding: 14px; text-align: center;
-    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
-    font-size: 13px; color: var(--muted); scroll-margin-top: 12px;
-  }
-  .credit .byline { font-size: 14px; }
-  .credit .phone { display: block; margin: 6px 0 10px; color: var(--text); font-size: 15px; font-weight: 650; text-decoration: none; font-variant-numeric: tabular-nums; }
-  .credit .ghost { display: inline-block; text-decoration: none; margin: 0 3px; }
-
   @media (max-width: 520px) {
-    .sgrid { grid-template-columns: 1fr 1fr; }
-    .summary .big { font-size: 26px; }
-  }
-  @media print {
-    body { background: #fff; }
-    .nav, .fill, footer, .halves, .rpending, .rh-del { display: none !important; }
-    .card { box-shadow: none; break-inside: avoid; }
-    .ot input { border: 0; background: none; }
+    .grid { grid-template-columns: 1fr; }
+    .hero .cta .btn { flex: 1 1 100%; }
+    .top nav { gap: 14px; font-size: 14px; }
+    section { padding: 44px 0; }
   }
 </style>
 </head>
 <body>
-<div class="wrap">
-  <header>
-    <div class="brand">
-      <svg class="logo" id="logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 108 108" aria-hidden="true">
-        <defs>
-          <linearGradient id="logoBg" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0" stop-color="#06B6D4"/>
-            <stop offset=".5" stop-color="#6366F1"/>
-            <stop offset="1" stop-color="#EC4899"/>
-          </linearGradient>
-        </defs>
-        <rect width="108" height="108" rx="26" fill="url(#logoBg)"/>
-        <circle cx="16" cy="18" r="16" fill="#fff" fill-opacity=".14"/>
-        <circle cx="96" cy="94" r="20" fill="#fff" fill-opacity=".12"/>
-        <path fill="#000" fill-opacity=".18" d="M36,37 H72 A6,6 0 0 1 78,43 V74 A6,6 0 0 1 72,80 H36 A6,6 0 0 1 30,74 V43 A6,6 0 0 1 36,37 Z"/>
-        <path fill="#fff" d="M36,34 H72 A6,6 0 0 1 78,40 V72 A6,6 0 0 1 72,78 H36 A6,6 0 0 1 30,72 V40 A6,6 0 0 1 36,34 Z"/>
-        <path fill="#F59E0B" d="M36,34 H72 A6,6 0 0 1 78,40 V47 H30 V40 A6,6 0 0 1 36,34 Z"/>
-        <path fill="#1E293B" d="M42,29 A2.5,2.5 0 0 1 44.5,31.5 V38.5 A2.5,2.5 0 0 1 39.5,38.5 V31.5 A2.5,2.5 0 0 1 42,29 Z M66,29 A2.5,2.5 0 0 1 68.5,31.5 V38.5 A2.5,2.5 0 0 1 63.5,38.5 V31.5 A2.5,2.5 0 0 1 66,29 Z"/>
-        <path fill="none" stroke="#4F46E5" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" d="M38.5,71 L45,53 L51.5,71 M41.2,65 H48.8"/>
-        <path fill="none" stroke="#DB2777" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" d="M58.5,71 V53 H64 A4.5,4.5 0 0 1 64,62 H58.5 M63,62 L69.5,71"/>
-      </svg>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#top" aria-label="AR Salary Tracker home"><img src="assets/logo.svg" alt="" width="34" height="34">AR Salary Tracker</a>
+    <nav aria-label="Sections">
+      <a href="#features" class="hide-sm">Features</a>
+      <a href="#install">Install</a>
+      <a href="#faq" class="hide-sm">FAQ</a>
+      <a href="#urdu" class="ur-link" lang="ur">اردو</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="wrap">
+      <div class="hero-text">
+        <h1 id="hero-title">Free daily wage &amp; overtime calculator for workers</h1>
+        <p class="lead">Mark the days you work, add your overtime hours, and see exactly how much you have earned: every 15 days and every month. Made for factory and daily-wage workers.</p>
+        <p class="ur-lead" lang="ur" dir="rtl">دیہاڑی، تنخواہ اور اوور ٹائم کا آسان حساب، بالکل مفت</p>
+        <div class="cta">
+          <a class="btn btn-primary" href="https://github.com/ABDURREHMAN629/salary-tracker/releases/latest/download/AR-Salary-Tracker.apk">⬇ Download free APK</a>
+          <a class="btn btn-ghost" href="app/">Use online</a>
+        </div>
+        <p class="meta">Android 8 or newer · 25 KB · Works offline · No sign-up · No ads</p>
+      </div>
+      <div class="phone">
+        <img src="assets/screenshot-summary.png" width="824" height="1784" fetchpriority="high"
+             alt="AR Salary Tracker app showing daily wage and overtime rates, rate history, and a monthly salary total">
+      </div>
+    </div>
+  </section>
+
+  <section id="features" aria-labelledby="features-title">
+    <div class="wrap">
+      <h2 id="features-title">Everything you need to track your daily wage</h2>
+      <p class="sub">Enter your salary per day and overtime rate once. The app does the counting, so you always know what you should be paid.</p>
+      <div class="grid">
+        <article class="card">
+          <div class="ico" style="background:#dcfce7">✅</div>
+          <h3>Daily attendance</h3>
+          <p>Tap <b>P</b> on days you work and <b>A</b> on days you are absent. Each present day adds your daily wage.</p>
+        </article>
+        <article class="card">
+          <div class="ico" style="background:#e0f2fe">⏱️</div>
+          <h3>Overtime calculator</h3>
+          <p>Type your overtime hours for any day. The app multiplies them by your overtime rate per hour.</p>
+        </article>
+        <article class="card">
+          <div class="ico" style="background:#ede9fe">💰</div>
+          <h3>15-day &amp; monthly totals</h3>
+          <p>See your salary, overtime pay and total for 1–15, 16 to month end, and the full month.</p>
+        </article>
+        <article class="card">
+          <div class="ico" style="background:#fee2e2">📅</div>
+          <h3>Fridays in red</h3>
+          <p>Every Friday is highlighted, so your usual day off is easy to spot.</p>
+        </article>
+        <article class="card">
+          <div class="ico" style="background:#fef3c7">📈</div>
+          <h3>Salary increase? No problem</h3>
+          <p>Add a new rate from the date it starts. Earlier days keep the old rate, so past totals stay correct.</p>
+        </article>
+        <article class="card">
+          <div class="ico" style="background:#fce7f3">🔒</div>
+          <h3>Private &amp; offline</h3>
+          <p>No internet needed. Your data stays only on your phone, with backup and restore.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section aria-labelledby="how-title" style="padding-top:0">
+    <div class="wrap how">
       <div>
-        <h1>AR Salary Tracker</h1>
-        <a class="byline" href="#contact">Developed by AR</a>
+        <h2 id="how-title">How it works</h2>
+        <p class="sub">Three simple steps, a few seconds a day.</p>
+        <ol class="steps">
+          <li><div><b>Set your rates once</b><span>Salary per day, overtime per hour, and your currency (for example Rs).</span></div></li>
+          <li><div><b>Mark each day</b><span>Tap P when you work. Add overtime hours if you stayed late.</span></div></li>
+          <li><div><b>Check your total</b><span>Your 15-day and monthly salary update instantly. Compare it with your pay slip.</span></div></li>
+        </ol>
       </div>
+      <img class="shot" src="assets/screenshot-days.png" width="824" height="1784" loading="lazy"
+           alt="Day list in AR Salary Tracker with present days, overtime hours, Fridays in red, and a new rate starting on 20 September">
     </div>
-    <div class="nav">
-      <button class="iconbtn" id="prev" type="button" aria-label="Previous month">&#8249;</button>
-      <div class="month" id="monthLabel"></div>
-      <button class="iconbtn" id="next" type="button" aria-label="Next month">&#8250;</button>
-      <button class="ghost" id="todayBtn" type="button">Today</button>
-    </div>
-  </header>
-
-  <section class="card rates">
-    <div class="rgrid">
-      <label>Salary per day
-        <input id="rateDay" type="number" inputmode="decimal" min="0" step="any" placeholder="e.g. 100">
-      </label>
-      <label>Overtime per hour
-        <input id="rateOt" type="number" inputmode="decimal" min="0" step="any" placeholder="e.g. 12.5">
-      </label>
-      <label>Currency
-        <input id="rateCur" type="text" maxlength="6" placeholder="Rs">
-      </label>
-    </div>
-    <p class="rnote" id="rateNote"></p>
-
-    <div class="rpending" id="ratePending" hidden>
-      <b>New rate?</b> Choose the date it starts. Days before that date keep the old rate.
-      <div class="rpend-row">
-        <label>Starts from
-          <input id="rateFrom" type="date">
-        </label>
-        <button class="primary" id="rateSave" type="button">Save new rate</button>
-      </div>
-      <div class="rpend-alt">
-        <button class="linkbtn" id="rateFix" type="button"></button>
-        <button class="linkbtn" id="rateCancel" type="button">Cancel</button>
-      </div>
-    </div>
-
-    <div class="rhist" id="rateHist" hidden></div>
   </section>
 
-  <section class="card summary">
-    <div class="lbl" id="sumLabel"></div>
-    <div class="big" id="mTotal">0</div>
-    <div class="sgrid">
-      <div><span>Days present</span><b id="mDays">0</b></div>
-      <div><span>Overtime hours</span><b id="mOtH">0</b></div>
-      <div><span>Salary</span><b id="mSal">0</b></div>
-      <div><span>Overtime pay</span><b id="mOtP">0</b></div>
+  <section id="install" aria-labelledby="install-title" style="padding-top:0">
+    <div class="wrap">
+      <h2 id="install-title">How to install the APK</h2>
+      <p class="sub">The app is not on the Play Store yet, so you install it from the file.</p>
+      <div class="install">
+        <ol class="steps">
+          <li><div><b>Download</b><span>Tap <a href="https://github.com/ABDURREHMAN629/salary-tracker/releases/latest/download/AR-Salary-Tracker.apk">Download free APK</a> on your Android phone.</span></div></li>
+          <li><div><b>Open the file</b><span>If the phone asks, turn on <b>Allow from this source</b>, then go back.</span></div></li>
+          <li><div><b>Install</b><span>Tap <b>Install</b>, then open <b>AR Salary Tracker</b> from your apps.</span></div></li>
+        </ol>
+        <div class="note">
+          <b>Seeing a Play Protect warning?</b>
+          <p>Android shows this for apps from outside the Play Store. Tap <b>More details → Install anyway</b>. The app asks for no permissions and never uses the internet.</p>
+          <p><b>Updating:</b> download the newest file from the same link and install it over the old app. Your data stays.</p>
+        </div>
+      </div>
     </div>
-    <div class="halves">
-      <a href="#period0"><span id="hLabel0">1–15</span><b id="h0">0</b></a>
-      <a href="#period1"><span id="hLabel1">16–30</span><b id="h1">0</b></a>
-    </div>
-    <p class="hint" id="rateHint">Enter your salary per day and overtime per hour above to see your earnings.</p>
   </section>
 
-  <div id="periods"></div>
-
-  <footer>
-    <p>Your data is saved on this device. Download a backup now and then to keep it safe.</p>
-    <button class="ghost" id="exportBtn" type="button">Download backup</button>
-    <button class="ghost" id="importBtn" type="button">Restore backup</button>
-    <input type="file" id="importFile" accept="application/json,.json" hidden>
-    <div class="credit" id="contact">
-      AR Salary Tracker · <span class="byline">Developed by AR</span>
-      <div>Developer contact</div>
-      <a class="phone" href="tel:+923247440629">+92 324 7440629</a>
-      <a class="ghost" href="tel:+923247440629">Call</a>
-      <a class="ghost" href="https://wa.me/923247440629">WhatsApp</a>
+  <section id="urdu" class="urdu" aria-labelledby="urdu-title" lang="ur" dir="rtl">
+    <div class="wrap">
+      <h2 id="urdu-title">اردو میں: دیہاڑی اور اوور ٹائم کا آسان حساب</h2>
+      <p>AR سیلری ٹریکر فیکٹری اور دیہاڑی پر کام کرنے والے مزدوروں کے لیے ایک مفت ایپ ہے۔ اس سے آپ اپنی حاضری، اوور ٹائم اور تنخواہ کا روزانہ حساب خود رکھ سکتے ہیں، تاکہ آپ کو ہمیشہ پتہ ہو کہ آپ کے کتنے پیسے بنتے ہیں۔</p>
+      <p class="roman" lang="ur-Latn">Roman Urdu: Dihari, tankhwah aur overtime ka asaan hisaab. Factory workers ke liye muft Android app.</p>
+      <div class="cols">
+        <div>
+          <h3>خصوصیات</h3>
+          <ul>
+            <li>جس دن کام پر جائیں، <span class="ltr">P</span> دبائیں۔ چھٹی ہو تو <span class="ltr">A</span>۔</li>
+            <li>اوور ٹائم کے گھنٹے لکھیں، پیسے خود بخود جڑ جائیں گے۔</li>
+            <li>ہر 15 دن اور پورے مہینے کی تنخواہ کا حساب۔</li>
+            <li>جمعہ کا دن سرخ رنگ میں نظر آتا ہے۔</li>
+            <li>دیہاڑی بڑھ جائے تو نیا ریٹ اسی تاریخ سے لگے گا، پرانے دنوں کا حساب نہیں بدلے گا۔</li>
+            <li>انٹرنیٹ کی ضرورت نہیں۔ آپ کا ڈیٹا صرف آپ کے فون میں رہتا ہے۔</li>
+          </ul>
+        </div>
+        <div>
+          <h3>ایپ کیسے انسٹال کریں</h3>
+          <ol>
+            <li>نیچے دیے گئے بٹن سے فائل ڈاؤن لوڈ کریں۔</li>
+            <li>فائل کھولیں۔ اگر فون اجازت مانگے تو <span class="ltr">Allow from this source</span> آن کریں۔</li>
+            <li><span class="ltr">Install</span> دبائیں۔</li>
+            <li>اگر وارننگ آئے تو <span class="ltr">More details</span> اور پھر <span class="ltr">Install anyway</span> دبائیں۔ ایپ محفوظ ہے، بس ابھی پلے سٹور پر نہیں ہے۔</li>
+          </ol>
+          <p><a class="btn btn-solid" href="https://github.com/ABDURREHMAN629/salary-tracker/releases/latest/download/AR-Salary-Tracker.apk">مفت ڈاؤن لوڈ کریں (اینڈرائیڈ)</a></p>
+        </div>
+      </div>
+      <h3>عام سوالات</h3>
+      <p><b>کیا یہ ایپ مفت ہے؟</b> جی ہاں، بالکل مفت ہے۔ نہ کوئی اشتہار، نہ کوئی اکاؤنٹ۔</p>
+      <p><b>کیا انٹرنیٹ چاہیے؟</b> نہیں، ایپ بغیر انٹرنیٹ کے چلتی ہے۔</p>
+      <p><b>کیا آئی فون پر چلتی ہے؟</b> ایپ کی فائل اینڈرائیڈ 8 یا نئے فون کے لیے ہے۔ آئی فون پر آپ اسے براؤزر میں <a href="app/">آن لائن</a> استعمال کر سکتے ہیں۔</p>
+      <p><b>رابطہ:</b> ڈیویلپر AR، کال یا واٹس ایپ: <a class="ltr" href="tel:+923247440629">+92 324 7440629</a>، ای میل: <a class="ltr" href="mailto:gabdurehman493@gmail.com">gabdurehman493@gmail.com</a></p>
     </div>
-  </footer>
-</div>
+  </section>
 
-<script>
-(function () {
-  const KEY = 'salaryTracker.v1';
-  const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-  const WD = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-  const FRIDAY = 5;
-  const $ = s => document.querySelector(s);
-  const pad = n => String(n).padStart(2, '0');
+  <section id="faq" aria-labelledby="faq-title">
+    <div class="wrap">
+      <h2 id="faq-title">Frequently asked questions</h2>
+      <p class="sub">Quick answers about the daily wage and overtime calculator.</p>
+      <details><summary>Is AR Salary Tracker free?</summary><p>Yes. It is completely free, with no ads and no sign-up.</p></details>
+      <details><summary>Does the app need internet?</summary><p>No. After you install it, the app works fully offline.</p></details>
+      <details><summary>Is my salary data private?</summary><p>Yes. Your data is saved only on your own phone and is never uploaded. Use <b>Download backup</b> in the app to keep a copy, for example on Google Drive.</p></details>
+      <details><summary>My daily wage increased. Will my old days change?</summary><p>No. Type the new rate at the top and choose the date it starts. Days before that date keep the old rate, and the app shows your full rate history.</p></details>
+      <details><summary>How is overtime calculated?</summary><p>Overtime pay = overtime hours × your overtime rate per hour. It is added to that day's wage and to your 15-day and monthly totals.</p></details>
+      <details><summary>Why does my phone show a warning when installing?</summary><p>The app is not on the Play Store, so Android warns about it. Tap <b>More details → Install anyway</b>.</p></details>
+      <details><summary>Does it work on iPhone or a computer?</summary><p>The app file is for Android 8 or newer. On iPhone or a computer, open the <a href="app/">online version</a> in your browser. Data is saved in that browser.</p></details>
+    </div>
+  </section>
 
-  const isoDate = (y, m, d) => y + '-' + pad(m + 1) + '-' + pad(d);
-  const todayIso = () => { const t = new Date(); return isoDate(t.getFullYear(), t.getMonth(), t.getDate()); };
-  const longDate = iso => { const p = iso.split('-'); return +p[2] + ' ' + MONTHS[p[1] - 1].slice(0, 3) + ' ' + p[0]; };
-  const byFrom = (a, b) => (a.from < b.from ? -1 : a.from > b.from ? 1 : 0);
-  const num = v => { const n = parseFloat(v); return isFinite(n) && n > 0 ? n : 0; };
-  const fmt = n => n.toLocaleString('en-US', { maximumFractionDigits: 2 });
-  const money = n => {
-    const whole = Math.round(n * 100) % 100 === 0;
-    const s = n.toLocaleString('en-US', { minimumFractionDigits: whole ? 0 : 2, maximumFractionDigits: 2 });
-    const cur = (data.rates.cur || '').trim();
-    return cur ? cur + ' ' + s : s;
-  };
-  const isFuture = (y, m, d) => { const t = new Date(); t.setHours(0, 0, 0, 0); return new Date(y, m, d) > t; };
+  <section id="contact" class="contact" aria-labelledby="contact-title" style="padding-top:0">
+    <div class="wrap">
+      <h2 id="contact-title">Contact the developer</h2>
+      <p class="sub" style="margin:0 auto">Questions, ideas or problems? Developed by <span class="grad">AR</span>.</p>
+      <a class="phone-no" href="tel:+923247440629">+92 324 7440629</a>
+      <a class="email" href="mailto:gabdurehman493@gmail.com">gabdurehman493@gmail.com</a>
+      <div class="cta">
+        <a class="btn btn-solid" href="https://wa.me/923247440629">WhatsApp</a>
+        <a class="btn btn-line" href="tel:+923247440629">Call</a>
+        <a class="btn btn-line" href="mailto:gabdurehman493@gmail.com">Email</a>
+      </div>
+    </div>
+  </section>
+</main>
 
-  // data.rateHistory: [{ from: 'YYYY-MM-DD', day, ot }] sorted by date.
-  // The first entry has from '' and covers every day before the next one.
-  let data = load();
-  const now = new Date();
-  let vy = now.getFullYear(), vm = now.getMonth();
+<footer>
+  <div class="wrap">
+    © 2026 AR Salary Tracker · Developed by AR ·
+    <a href="https://github.com/ABDURREHMAN629/salary-tracker">Source code on GitHub</a>
+  </div>
+</footer>
 
-  function blank() { return { rates: { cur: '' }, rateHistory: [{ from: '', day: 0, ot: 0 }], days: {} }; }
-  function normalize(d) {
-    if (!d || typeof d !== 'object' || !d.days || typeof d.days !== 'object') return null;
-    const r = d.rates || {};
-    let hist = Array.isArray(d.rateHistory)
-      ? d.rateHistory.filter(h => h && typeof h === 'object')
-          .map(h => ({ from: typeof h.from === 'string' ? h.from : '', day: num(h.day), ot: num(h.ot) }))
-      : [];
-    if (!hist.length) hist = [{ from: '', day: num(r.day), ot: num(r.ot) }]; // older versions had one rate for all days
-    hist.sort(byFrom);
-    hist[0].from = '';
-    return { rates: { cur: typeof r.cur === 'string' ? r.cur : '' }, rateHistory: hist, days: d.days };
-  }
-  // Inside the Android app, window.AndroidApp stores data in the phone's app storage
-  function load() {
-    try {
-      const raw = window.AndroidApp ? AndroidApp.load() : localStorage.getItem(KEY);
-      return normalize(JSON.parse(raw)) || blank();
-    } catch (e) { return blank(); }
-  }
-  function save() {
-    const json = JSON.stringify(data);
-    try {
-      if (window.AndroidApp) AndroidApp.store(json); else localStorage.setItem(KEY, json);
-    } catch (e) {}
-  }
-
-  // Rates
-  const latestRate = () => data.rateHistory[data.rateHistory.length - 1];
-  function rateFor(key) {
-    const h = data.rateHistory;
-    let r = h[0];
-    for (let i = 1; i < h.length && h[i].from <= key; i++) r = h[i];
-    return r;
-  }
-  const rateText = r => money(r.day) + '/day · ' + money(r.ot) + '/hr';
-
-  const dayInput = $('#rateDay'), otInput = $('#rateOt'), curInput = $('#rateCur');
-
-  function fillRates() {
-    const r = latestRate();
-    dayInput.value = r.day || '';
-    otInput.value = r.ot || '';
-    curInput.value = data.rates.cur || '';
-    hidePending();
-  }
-
-  // Before any day is marked, typing a rate just sets it. After that, a change asks for a start date.
-  function isSetup() {
-    const h = data.rateHistory;
-    return !Object.keys(data.days).length || (h.length === 1 && !h[0].day && !h[0].ot);
-  }
-
-  function onRateInput() {
-    const r = latestRate();
-    const d = num(dayInput.value), o = num(otInput.value);
-    if (isSetup()) {
-      r.day = d; r.ot = o;
-      save(); renderRates(); render();
-      return;
-    }
-    dayInput.classList.toggle('changed', d !== r.day);
-    otInput.classList.toggle('changed', o !== r.ot);
-    if (d === r.day && o === r.ot) { hidePending(); return; }
-    const pending = $('#ratePending');
-    if (pending.hidden) {
-      $('#rateFrom').value = todayIso();
-      $('#rateFix').textContent = 'Typed it wrong? Fix the rate for all days' + (r.from ? ' since ' + longDate(r.from) : '');
-      pending.hidden = false;
-    }
-  }
-  function hidePending() {
-    $('#ratePending').hidden = true;
-    dayInput.classList.remove('changed');
-    otInput.classList.remove('changed');
-  }
-  function afterRateChange() {
-    save(); fillRates(); renderRates(); render();
-  }
-
-  dayInput.addEventListener('input', onRateInput);
-  otInput.addEventListener('input', onRateInput);
-  curInput.addEventListener('input', () => { data.rates.cur = curInput.value; save(); renderRates(); render(); });
-
-  $('#rateSave').addEventListener('click', () => {
-    const from = $('#rateFrom').value;
-    if (!/^\d{4}-\d{2}-\d{2}$/.test(from)) { $('#rateFrom').focus(); return; }
-    const entry = { from: from, day: num(dayInput.value), ot: num(otInput.value) };
-    const h = data.rateHistory;
-    const same = h.findIndex(x => x.from === from);
-    if (same >= 0) h[same] = entry; else h.push(entry);
-    h.sort(byFrom);
-    h[0].from = '';
-    afterRateChange();
-  });
-  $('#rateFix').addEventListener('click', () => {
-    const r = latestRate();
-    r.day = num(dayInput.value);
-    r.ot = num(otInput.value);
-    afterRateChange();
-  });
-  $('#rateCancel').addEventListener('click', fillRates);
-
-  $('#rateHist').addEventListener('click', ev => {
-    const btn = ev.target.closest('.rh-del');
-    if (!btn) return;
-    const i = +btn.dataset.i;
-    const r = data.rateHistory[i];
-    if (!r || !i) return;
-    if (!confirm('Remove the rate starting ' + longDate(r.from) + '? Those days will use the earlier rate again.')) return;
-    data.rateHistory.splice(i, 1);
-    afterRateChange();
-  });
-
-  function renderRates() {
-    const h = data.rateHistory;
-    const r = latestRate();
-    const note = $('#rateNote'), box = $('#rateHist');
-    if (!r.day && !r.ot) note.textContent = '';
-    else if (h.length === 1) note.textContent = 'Used for all days. When your rate changes, type the new rate here and pick the date it starts.';
-    else note.textContent = 'Current rate, since ' + longDate(r.from) + '. Earlier days keep their old rate.';
-
-    if (h.length < 2) { box.hidden = true; box.innerHTML = ''; return; }
-    box.hidden = false;
-    box.innerHTML = '<div class="rh-title">Rate history</div>' + h.map((x, i) =>
-      '<div class="rh-row">' +
-        '<span class="rh-from">' + (i ? 'From ' + longDate(x.from) : 'Before ' + longDate(h[1].from)) + '</span>' +
-        '<span class="rh-val">' + rateText(x) + '</span>' +
-        (i ? '<button class="rh-del" type="button" data-i="' + i + '" aria-label="Remove rate starting ' + longDate(x.from) + '">✕</button>' : '') +
-      '</div>'
-    ).join('');
-  }
-
-  function setEntry(key, e) {
-    const clean = {};
-    if (e.s) clean.s = e.s;
-    if (num(e.ot)) clean.ot = num(e.ot);
-    if (Object.keys(clean).length) data.days[key] = clean; else delete data.days[key];
-    save();
-  }
-
-  function paintRow(row) {
-    const e = data.days[row.dataset.key] || {};
-    row.querySelector('.p').setAttribute('aria-pressed', e.s === 'P');
-    row.querySelector('.a').setAttribute('aria-pressed', e.s === 'A');
-  }
-
-  function render() {
-    const dim = new Date(vy, vm + 1, 0).getDate();
-    const t = new Date();
-    $('#monthLabel').textContent = MONTHS[vm] + ' ' + vy;
-    $('#sumLabel').textContent = MONTHS[vm] + ' ' + vy + ' total';
-
-    const host = $('#periods');
-    host.innerHTML = '';
-    [[1, 15], [16, dim]].forEach(([a, b], i) => {
-      $('#hLabel' + i).textContent = a + '–' + b;
-      const sec = document.createElement('section');
-      sec.className = 'card period';
-      sec.id = 'period' + i;
-      sec.innerHTML =
-        '<div class="phead">' +
-          '<div><h2>' + a + ' – ' + b + ' ' + MONTHS[vm] + '</h2><div class="pmeta" data-meta></div></div>' +
-          '<div class="ptotal"><span>15-day total</span><b data-total></b></div>' +
-        '</div>' +
-        '<div class="pbreak">' +
-          '<span>Salary <b data-sal></b></span>' +
-          '<span>Overtime <b data-otp></b></span>' +
-          '<button class="ghost fill" type="button" title="Marks empty days up to today as P (Fridays are skipped)">Fill P till today</button>' +
-        '</div>' +
-        '<div class="rowhead"><span>Date</span><span>Attend.</span><span>OT hours</span><span>Earned</span></div>' +
-        '<div class="rows"></div>';
-      sec.querySelector('.fill').disabled = isFuture(vy, vm, a);
-
-      const rows = sec.querySelector('.rows');
-      for (let d = a; d <= b; d++) {
-        const wd = new Date(vy, vm, d).getDay();
-        const key = isoDate(vy, vm, d);
-        const isToday = d === t.getDate() && vm === t.getMonth() && vy === t.getFullYear();
-        const newRate = data.rateHistory.find((r, i) => i && r.from === key);
-        if (newRate) {
-          const strip = document.createElement('div');
-          strip.className = 'ratechg';
-          strip.textContent = 'New rate from ' + d + ' ' + MONTHS[vm].slice(0, 3) + ': ' + rateText(newRate);
-          rows.appendChild(strip);
-        }
-        const row = document.createElement('div');
-        row.className = 'row' + (wd === FRIDAY ? ' fri' : '') + (isToday ? ' today' : '');
-        row.dataset.key = key;
-        row.dataset.day = d;
-        row.dataset.wd = wd;
-        row.innerHTML =
-          '<div class="date"><span class="dn">' + pad(d) + '</span><span class="dw">' + WD[wd] + '</span></div>' +
-          '<div class="att">' +
-            '<button type="button" class="p" aria-label="Present on ' + d + ' ' + MONTHS[vm] + '">P</button>' +
-            '<button type="button" class="a" aria-label="Absent on ' + d + ' ' + MONTHS[vm] + '">A</button>' +
-          '</div>' +
-          '<div class="ot"><input type="number" inputmode="decimal" min="0" step="0.5" placeholder="0" aria-label="Overtime hours on ' + d + ' ' + MONTHS[vm] + '"><span>h</span></div>' +
-          '<div class="amt"></div>';
-        const e = data.days[key];
-        if (e && e.ot) row.querySelector('input').value = e.ot;
-        paintRow(row);
-        rows.appendChild(row);
-      }
-      host.appendChild(sec);
-    });
-    recalc();
-  }
-
-  function recalc() {
-    const M = { p: 0, a: 0, oth: 0, sal: 0, otp: 0 };
-
-    document.querySelectorAll('.period').forEach((sec, i) => {
-      const P = { p: 0, a: 0, oth: 0, sal: 0, otp: 0 };
-      sec.querySelectorAll('.row').forEach(row => {
-        const e = data.days[row.dataset.key] || {};
-        const rate = rateFor(row.dataset.key); // the rate that applied on this date
-        const hours = num(e.ot);
-        const sal = e.s === 'P' ? rate.day : 0;
-        const otp = hours * rate.ot;
-        if (e.s === 'P') P.p++;
-        if (e.s === 'A') P.a++;
-        P.oth += hours; P.sal += sal; P.otp += otp;
-
-        const amt = row.querySelector('.amt');
-        const v = sal + otp;
-        amt.textContent = v ? fmt(v) : '—';
-        amt.classList.toggle('zero', !v);
-      });
-      sec.querySelector('[data-meta]').textContent = P.p + ' present · ' + P.a + ' absent · ' + fmt(P.oth) + ' OT hrs';
-      sec.querySelector('[data-sal]').textContent = money(P.sal);
-      sec.querySelector('[data-otp]').textContent = money(P.otp);
-      sec.querySelector('[data-total]').textContent = money(P.sal + P.otp);
-      $('#h' + i).textContent = money(P.sal + P.otp);
-      for (const k in M) M[k] += P[k];
-    });
-
-    $('#mTotal').textContent = money(M.sal + M.otp);
-    $('#mDays').textContent = M.p;
-    $('#mOtH').textContent = fmt(M.oth);
-    $('#mSal').textContent = money(M.sal);
-    $('#mOtP').textContent = money(M.otp);
-    $('#rateHint').hidden = data.rateHistory.some(r => r.day || r.ot);
-  }
-
-  // Day interactions
-  const periods = $('#periods');
-  periods.addEventListener('click', ev => {
-    const btn = ev.target.closest('.att button');
-    if (btn) {
-      const row = btn.closest('.row');
-      const val = btn.classList.contains('p') ? 'P' : 'A';
-      const e = Object.assign({}, data.days[row.dataset.key]);
-      e.s = e.s === val ? '' : val; // tap again to clear
-      setEntry(row.dataset.key, e);
-      paintRow(row);
-      recalc();
-      return;
-    }
-    const fill = ev.target.closest('.fill');
-    if (fill) {
-      fill.closest('.period').querySelectorAll('.row').forEach(row => {
-        if (+row.dataset.wd === FRIDAY || isFuture(vy, vm, +row.dataset.day)) return;
-        const e = Object.assign({}, data.days[row.dataset.key]);
-        if (!e.s) { e.s = 'P'; setEntry(row.dataset.key, e); paintRow(row); }
-      });
-      recalc();
-    }
-  });
-  periods.addEventListener('input', ev => {
-    if (!ev.target.matches('.ot input')) return;
-    const row = ev.target.closest('.row');
-    const e = Object.assign({}, data.days[row.dataset.key]);
-    e.ot = num(ev.target.value);
-    setEntry(row.dataset.key, e);
-    recalc();
-  });
-
-  // Month navigation
-  function shift(delta) {
-    vm += delta;
-    if (vm < 0) { vm = 11; vy--; }
-    if (vm > 11) { vm = 0; vy++; }
-    render();
-  }
-  $('#prev').addEventListener('click', () => shift(-1));
-  $('#next').addEventListener('click', () => shift(1));
-  $('#todayBtn').addEventListener('click', () => {
-    const t = new Date();
-    vy = t.getFullYear(); vm = t.getMonth();
-    render();
-    const row = document.querySelector('.row.today');
-    if (row) row.scrollIntoView({ behavior: 'smooth', block: 'center' });
-  });
-
-  // Backup / restore
-  $('#exportBtn').addEventListener('click', () => {
-    const json = JSON.stringify(data, null, 2);
-    const name = 'ar-salary-backup-' + todayIso() + '.json';
-    if (window.AndroidApp) { AndroidApp.saveBackup(json, name); return; }
-    const blob = new Blob([json], { type: 'application/json' });
-    const a = document.createElement('a');
-    a.href = URL.createObjectURL(blob);
-    a.download = name;
-    document.body.appendChild(a);
-    a.click();
-    a.remove();
-    setTimeout(() => URL.revokeObjectURL(a.href), 1000);
-  });
-  $('#importBtn').addEventListener('click', () => $('#importFile').click());
-  $('#importFile').addEventListener('change', ev => {
-    const file = ev.target.files[0];
-    ev.target.value = '';
-    if (!file) return;
-    const reader = new FileReader();
-    reader.onload = () => {
-      let d = null;
-      try { d = normalize(JSON.parse(reader.result)); } catch (e) {}
-      if (!d) { alert('That file is not a valid salary backup.'); return; }
-      if (!confirm('Replace all current data with this backup?')) return;
-      data = d;
-      afterRateChange();
-    };
-    reader.readAsText(file);
-  });
-
-  // Browser tab icon = the header logo
-  $('#favicon').href = 'data:image/svg+xml,' + encodeURIComponent($('#logo').outerHTML);
-
-  fillRates();
-  renderRates();
-  render();
-})();
-</script>
 </body>
 </html>
